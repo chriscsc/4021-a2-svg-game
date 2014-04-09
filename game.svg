@@ -4,305 +4,274 @@
      xmlns:xhtml="http://www.w3.org/1999/xhtml"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      xmlns:a="http://www.adobe.com/svg10-extensions" a:timeline="independent"
+     xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
      onload="top.load(evt)">
 
-  <defs>
-   
-        
-    <clipPath id="gameareaclip">
-      <rect x="20" y="20" width="600" height="560"/>
-    </clipPath>
-    
-<g id="bullet">
-  <circle cx="5" cy="5" r="5" style="fill:red"/>
-  <circle cx="6" cy="3" r="1" style="fill:pink"/>
-</g>
+	<defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFDA4E" offset="0%"></stop>
+            <stop stop-color="#FF5900" offset="100%"></stop>
+        </linearGradient>
+	    <clipPath id="gameareaclip">
+	      <rect x="20" y="20" width="600" height="560"/>
+	    </clipPath>
+		<g id="bullet">
+			<circle cx="5" cy="5" r="5" style="fill:red"/>
+			<circle cx="6" cy="3" r="1" style="fill:pink"/>
+		</g>
 
-    <pattern id="background_pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-      <rect width="20" height="20" style="fill:yellow"/>
-      <circle cx="10" cy="10" r="8" style="fill:lightyellow"/>
-    </pattern>
-    
-    <radialGradient id="player_color">
-      <stop offset="0.0" style="stop-color:yellow;stop-opacity:1"/>
-      <stop offset="0.8" style="stop-color:yellow;stop-opacity:1"/>
-      <stop offset="1.0" style="stop-color:orange;stop-opacity:1"/>
-    </radialGradient>
+	    <pattern id="background_pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+	      <rect width="20" height="20" style="fill:yellow"/>
+	      <circle cx="10" cy="10" r="8" style="fill:lightyellow"/>
+	    </pattern>
 
-    <g id = "sweet">
-	<rect x="0" y="10" width="40" height="20"
-		 style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1" rx="9.5"
-		ry="9.5" transform="rotate(-45 20 20)"/>
-	<rect x="0" y="10" width="40" height="20"
-		 style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1" rx="9.5"
-		ry="9.5" transform="rotate(45 20 20)"/>
-    </g>
+	    <radialGradient id="player_color">
+	      <stop offset="0.0" style="stop-color:yellow;stop-opacity:1"/>
+	      <stop offset="0.8" style="stop-color:yellow;stop-opacity:1"/>
+	      <stop offset="1.0" style="stop-color:orange;stop-opacity:1"/>
+	    </radialGradient>
 
-    <g id="monster">
- <path	d="M0 30 L0 0 L5 3 L10 0 L15 3 L20 0 L25 3 L30 0 L35 3 L40 0 L40 40 L35 33 L30 40 	L25 33 L20 40 L15 33 L10 40 L5 33 L0 40 L0 30"
-	 style="fill:rgb(128,128,128);fill-opacity:0.5;stroke:rgb(0,0,0);stroke-width:2"/>
-	<ellipse cx="29" cy="10.5" rx="5" ry="4.5"
-		 style="fill:rgb(36,36,24);stroke:rgb(0,0,0);stroke-width:1"/>
-	<ellipse cx="35" cy="25" rx="2" ry="1"
-		 style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1">
-		<animate attributeName="ry" attributeType="XML" dur="5s" values="1; 4; 1"
-repeatCount="indefinite"/>
-	 </ellipse>
-</g>
-  </defs>
-  
+	    <g id = "sweet">
+	    	<image width="40" height="40" xlink:href="data:image/png;base64,
+				iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAEGklEQVR42u1Y604TQRTuD23pvbSl
+				iZYEQkKi3G9tkRZLW6DUNhQBkZuKEQlqFUxAyy8fwUfgEXgEHoFH4BF4hPF8szvb3e2F3XLRxE5y
+				suzsMPOd853b1GJpjdZojf90jLdbvLFO20Ek/PA3Pc/1Eu20nuF7NPxw+F6BRTofJHF4vMvGisMu
+				thP3sf20v6ZsT3r5mljYdgmwUOpOLQZg+X4n2022s/JiiJ0sdlSk2MHnyvI7nuWiJCfFEFck0+u4
+				oj1+3To40ITNAQyHldUA6Pl5zs9WIm7+DVIYcbFMv4Md5QPKWkmJELdqott2dmvWxEYzPfbLo3xH
+				BZxsFSEAmOqzK+9bcS8H+IXm1QoJkKW5AAMbtwKOfO3icCEoHUTAjgtBtjzhYgcLAQ3It9NezTsE
+				IF9OuNmPgqyQsDwJ2IiGrac3Aghw0FY6UNo4T/SlntrZ7oyvCpBeNp55uGU3pzzKXFn2V+GXyAJN
+				gUPUwV/UTo9N99LtbIYAAqgaDCyqtypkdsDBPtRQRuyHoDOdikBtssd+pQfXSAqjTrY1VU3zt6wW
+				NJRbHHMpVoT7IG+ath7M3wjcQS7ArbObkiJ7Z9pX8bUG8mLEqQTUTznwkCtNWZGc9+IwK6UIWOXr
+				fDV12SEHS/fb2fdcUDMPoJh/n7zeR0VUm/ZFVAmxAQLiTaJC3cKQk6eRRgdvklLbicYAEfUi8hGI
+				hmlGKcs+cSjUwl/2Mn6N5UCt2qeutZRIO/R/xXEpuLDnq5hHqkj0TgBZUwD1Aj/LDlYAgk64QK0A
+				0UuJ1gmASiTL55gGKKKsXvoQgkT8abadLculDiUPc/p12+QmR/lgVaoRVckwQKSYTK9d0WyJDkv3
+				Gadxn8CiFsOyotRB5gYcmnep0ti5IVBGEZjG0wy1R1wzVXI2ClC4ARTTW0z9fS0mVRnsjdbMVNnD
+				4tKsX6FZ7W/ibwBYqkFlPYH1BOBDSk1gBQB3nvt4h0N58J1xCz62FlfG3BonFlEoKkNu2MnmB52G
+				ASL6N6sCSarLcCnT7Ve8q01qsepUk9WoW0kx69QUrE16NN8ROEgjqzGpm0EuhVL6RG2aXrUV1yOe
+				SsavARJVA8/XBA6UofyJbytRt0IjKAVIBJA+xeT6nFejjyxdTXbS1lNoqPRyRMfSuJsfKmqwusKA
+				RmOUYy+yPBnAlO/Va1hRisqq+wfA6WuwXpAXEUQfaa02miVFUX9v3LAKkInutnNEmuY+oqNcTyF8
+				cIMaVbRh6tb/mPwaAdh0o1q3wtCGaIuU9l/ujPdSUgMLqRvVsuVLBJTf7G5C63W3O1AOC1SuAiGN
+				j4qrQUWoBlNO5T0fXZTu9G6sjnAcluxp4wfD2WsJ2nl05vC1e/+FQd1c8J846EKulr/ys0drtEZr
+				/IPjD/iAfEvMYEMwAAAAAElFTkSuQmCC
+			"/>
+	    </g>
 
-  <rect width="100%" height="100%" style="fill:url(#background_pattern);stroke:orange;stroke-width:4" />
+		<g id="monster">
+			<image width="40" height="40" xlink:href="data:image/gif;base64,
+				R0lGODlhKAAoAPUHAAAAAEMoE2k+HsAAAMVrJaWlpf///63npQAAAAAAAAAAAAAAAAAAAAAAAAAA
+				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAK3npSH5BAkUAAcAIf8LTkVUU0NBUEUyLjAD
+				AQAAACwAAAAAKAAoAAAGzsCDcEgsGo/IpHLJbDqf0Kh0Sq1ar1KAdsvdYg9agXhMHmutgLJaDaCm
+				13BzNk4Xt59vcUAbWO8BfXJOeQJca4aCTIQCf4FljWV3S4t1cZJJlJVwe5N+Bp8Dnwahn45kl0aZ
+				AgOhrK2sowObSKqrrre4lql0uL2sdJe1YrCusa+Rp0SLpoyipKOipgF7iWCBe8yaetNtesHTf1va
+				239CXkXnQ3zg7O3cqFld8ulf9fb3+PlTBfz9/gX2/gn0d2WgQYIFD/bTx7Chw4cQmQQBACH5BAkU
+				AAcALAAAAAAoACgAAAbTwINwSCwaj8ikcslsOp/QqHRKrVqv2Kx2y0UCvuAwOPsVmM/o89cKSLvd
+				AGr7TVcPx0X8YV7vx/lxdwFmAXtoAV+DbogAimZ8AoFCgIZqYG9hdZKVj2mMjoeJdIhEkH2nb6R5
+				qKyem6WghwazA7MGtbOxAqpeugIDtcDBwLcDi69GpmbCzM3GrkvKv87OnrxJysTCxcPQTMoBtri3
+				tqAB10rSrOfo0Y2+qedrUons9vfyyFFi/GFd/wADYilAsKDBglkOKlRYZaFDhg0fHhRIseK/IAAh
+				+QQJFAAHACwAAAAAKAAoAAAGycCDcEgsGo/IpHLJbDqf0Kh0Sq1ar1KAdsvdYg9agXhMHmutgLJa
+				DaCm13BzNk4Xt59vcUAbWO8BfXJOeQJca4aCTIQCf4FljWV3S4t1cZJJlJWWSpmacQFInYwGpAOk
+				BqakjmxGogIDprCxsKgDn5eur7K7vJFkuI9ltLK1s495uIF7q6Olp6kGqwHLjMnTW55q03tgZ0Ve
+				QmHZ295RfNvo6deXU13uXF/x8vP0SwX3+Pn4X/r9/VX+Av4DKFBfvYMIEypcyLBKEAAh+QQFFAAH
+				ACwAAAAAKAAoAAAG1sCDcEgsGo/IpHLJbDqf0Kh0Sq1ar9hsEsDtertZrmBMLpO5VoB5vQYQwUW4
+				UM2un910gXsICIz3eXaCgXtzZweBAVx+a4p9doWIZWJ3lGZedYpvgo6MZp1smnGCpHaiRo+lqgKn
+				R6mfBrEDsQazsZ5kra5sA7O9vr21A42Ru2u/yMnDn8WovMrKn7rGZcG/wsDMTYFjAbS2tbS4AdNI
+				3Kus5M1Ki7ic6utM7eT09fVoaV/6clr9/lUFAgocSPAKwYMIC0xJyPAglYYI/0mcSLGixYv9ggAA
+				Ow==
+			"/>
+		</g>
+	</defs>
 
-  <rect x="20" y="20" width="600" height="560" style="fill:black;stroke:red;stroke-width:5" />
-  
+	<rect width="100%" height="100%" style="fill:url(#background_pattern);stroke:orange;stroke-width:4" />
 
-  
-<!-- Score -->
+	<rect x="20" y="20" width="600" height="560" style="fill:black;stroke:red;stroke-width:5" />
+
+
+
+	<!-- Score -->
 	<g transform="translate(640, 120)">
- 	 <text x="70" y="0"
- 	  style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-  	  Score:
-	  </text>
-	  <rect x="0" y="10" width="140" height="35" style="fill:white" />
-	  <text id="score" x="70" y="36"
-	   style="fill:orange;font-size:25px;text-anchor:middle">0</text>
+		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			Score:
+		</text>
+		<rect x="0" y="10" width="140" height="35" style="fill:white" />
+		<text id="score" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			0
+		</text>
 	</g>
 
 
-<!-- Bullet remain -->
+	<!-- Bullet remain -->
 	<g transform="translate(640, 190)">
-	 	 <text x="70" y="0"
-	 	  style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-	  	  Bullet Remain:
-		  </text>
-		  <rect x="0" y="10" width="140" height="35" style="fill:white" />
-		  <text id="bulletRemain" x="70" y="36"
-		   style="fill:orange;font-size:25px;text-anchor:middle">8</text>
+		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			Bullet Remain:
+		</text>
+		<rect x="0" y="10" width="140" height="35" style="fill:white" />
+		<text id="bulletRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			8
+		</text>
 	</g>
 
-<!-- HP -->
+	<!-- HP -->
 	<g transform="translate(640, 260)">
-	 	 <text x="70" y="0"
-	 	  style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-	  	  HP Remain:
-		  </text>
-		  <rect x="0" y="10" width="140" height="35" style="fill:white" />
-		  <text id="HPRemain" x="70" y="36"
-		   style="fill:orange;font-size:25px;text-anchor:middle">2</text>
+		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			HP Remain:
+		</text>
+		<rect x="0" y="10" width="140" height="35" style="fill:white" />
+		<text id="HPRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			2
+		</text>
 	</g>
 
-<!-- Level -->
+	<!-- Level -->
 	<g transform="translate(640, 330)">
-	 	 <text x="70" y="0"
-	 	  style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-	  	  Level:
-		  </text>
-		  <rect x="0" y="10" width="140" height="35" style="fill:white" />
-		  <text id="Level" x="70" y="36"
-		   style="fill:orange;font-size:25px;text-anchor:middle">1</text>
+		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			Level:
+		</text>
+		<rect x="0" y="10" width="140" height="35" style="fill:white" />
+		<text id="Level" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			1
+		</text>
 	</g>
 
-<!-- Time -->
+	<!-- Time -->
 	<g transform="translate(640, 400)">
-	 	 <text x="70" y="0"
-	 	  style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-	  	  Time:
-		  </text>
-		  <rect x="0" y="10" width="140" height="35" style="fill:white" />
-		  <text id="TimeRemain" x="70" y="36"
-		   style="fill:orange;font-size:25px;text-anchor:middle">60</text>
+		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			Time:
+		</text>
+		<rect x="0" y="10" width="140" height="35" style="fill:white" />
+		<text id="TimeRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			60
+		</text>
 	</g>
-	
+
 	<g id="startpage" transform="translate(0,0)" width="800" height="600" style = " visibility : visible">
-		<rect x="0" y="0" width="800" height="600" style="fill:rgb(255,255,0)" />
-		<text x="400px" y="50px" style="fill:rgb(255,0,255);font-size:30;text-anchor:middle">Goods Hunting</text>
-		<text x="400" y="130" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle">You are a paper hunter. You need to collect goods</text>
-		<text x="400" y="170" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> as many as possible. Use the N key to go left,</text>
-		<text x="400" y="210" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> the M key to go right and the Z key to jump. </text>
-		<text x="400" y="250" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> Dummy papers are going to stop you on the way. </text>
-		<text x="400" y="290" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> Use the spacebar to shoot and kill them. Pick up </text>
-		<text x="400" y="330" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> the goods amd go to the exit quickly. You can earn </text>
-		<text x="400" y="370" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> double points in zoom mode, which is much harder.</text>
-		<text x="700" y="50" style="fill:rgb(255,0,0);font-size:30;text-anchor:middle"> MAR Chun Sum</text>
+        <rect id="Rectangle-1" stroke="#979797" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup" x="0" y="0" width="800" height="600"></rect>
+        <text id="You-are-super-biscui" fill="#FFFFFF" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="24" font-weight="normal">
+            <tspan x="66.5" y="213" fill="#FFFFFF">You are super biscuits lover, and some monsters are stealing </tspan>
+            <tspan x="66.5" y="242" fill="#FFFFFF">your biscuits!!! </tspan>
+            <tspan x="66.5" y="271" fill="#FFFFFF">Try to kill all of them and get back as many as biscuit you can!</tspan>
+            <tspan x="66.5" y="300" fill="#FFFFFF">Use N key to go left. M key to go right </tspan>
+            <tspan x="66.5" y="329" fill="#FFFFFF">Use spacebar to shoot the monster</tspan>
+            <tspan x="66.5" y="358" fill="#FFFFFF">Eat all the biscuits and go to the exit quickly.</tspan>
+            <tspan x="66.5" y="387" fill="#FFFFFF">Double point will be given in the zoom mode. which is harder.</tspan>
+            <tspan x="66.5" y="416" fill="#FFFFFF"></tspan>
+        </text>
 
 		<g onclick="top.zoomMode()" >
-  			<rect x="500" y="450" width="150" height="40"
-         			 style="fill:white;stroke:red;stroke-width:2" />
-   			<text x="575" y="480"
-          			style="fill:red;font-size:25px;text-anchor:middle">Zoom Mode</text>
+	        <rect id="Rectangle-1" stroke="#4990E2" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="500" y="450" width="150" height="40" rx="8"></rect>
+	        <text id="Normal-Mode" fill="#4990E2" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="18" font-weight="normal">
+	            <tspan x="526" y="477" fill="#000000">
+	            	Zoom Mode
+	            </tspan>
+	        </text>
   		</g>
+
   		<g onclick="top.normalMode()" >
-		  	<rect x="200" y="450" width="150" height="40"
-		         	style="fill:white;stroke:red;stroke-width:2" />
-		   	<text x="275" y="480"
-		          	style="fill:red;font-size:25px;text-anchor:middle">Normal Mode</text>
+	        <rect id="Rectangle-1" stroke="#4990E2" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="200" y="450" width="150" height="40" rx="8"></rect>
+	        <text id="Normal-Mode" fill="#4990E2" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="18" font-weight="normal">
+	            <tspan x="220" y="477" fill="#000000">
+	            	Normal Mode
+	            </tspan>
+	        </text>
   		</g>
 	</g>
 
-  <g style="clip-path:url(#gameareaclip)">
-    <g transform="translate(20,20)">
-      <g id="gamearea" transform="translate(0,0)" width="600" height="560" style = " visibility : hidden">
+	<g style="clip-path:url(#gameareaclip)">
+		<g transform="translate(20,20)">
+			<g id="gamearea" transform="translate(0,0)" width="600" height="560" style = " visibility : hidden">
 
-        <rect x="0" y="0" width="600" height="560" style="fill:white" />
+				<rect x="0" y="0" width="600" height="560" style="fill:white" />
 
-        
-        <g id="platforms">
 
-          <!-- Add your platforms here -->
-	<rect x="0" y="60" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="20" y="80" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="40" y="100" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="60" y="120" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="200" y="80" width="200" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="80" y="140" width="60" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165" transform="translate(0 0)"/>
-	<rect x="150" y="200" width="200" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="0" y="540" width="600" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="0" y="520" width="60" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="260" y="520" width="60" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="280" y="500" width="20" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="0" y="500" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="360" y="460" width="20" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="380" y="440" width="20" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="400" y="420" width="60" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="40" y="380" width="20" height="40"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="0" y="360" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="20" y="380" width="20" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="0" y="220" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="20" y="240" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="40" y="260" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="60" y="280" width="40" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="80" y="140" width="60" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="120" y="480" width="20" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="140" y="460" width="20" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="160" y="440" width="80" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="520" y="500" width="20" height="40"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="540" y="480" width="20" height="60"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="560" y="460" width="20" height="80"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect x="580" y="440" width="20" height="100"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect id="verticalPlatform" x="500" y="140" width="80" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	<rect id="horizontalPlatform" x="100" y="280" width="60" height="20"
-		 style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-		ry="5.79165"/>
-	
-	
-    </g>
+				<g id="platforms">
 
-	<g id="sweets"/>
-    <g id="monsters"/>
-        
-<!-- door -->
-	<g>
-		<rect id="door" x="260" y="40" width="40" height="40"
+					<!-- Add your platforms here -->
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="259" y="459" width="80" height="40"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="239" y="139" width="80" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="239" y="239" width="80" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-1" y="379" width="201" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-1" y="379" width="201" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-1" y="499" width="201" height="60"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="399" y="499" width="200" height="60"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="199" y="539" width="200" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-2" y="279" width="201" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-2" y="179" width="201" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-2" y="79" width="201" height="20"></rect>
+					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="238" y="339" width="80" height="20"></rect>
+					<rect id="Rectangle-13" stroke="#979797" sketch:type="MSShapeGroup" x="300" y="159" width="20" height="80"></rect>
+					<rect id="Rectangle-14" stroke="#979797" sketch:type="MSShapeGroup" x="239" y="259" width="20" height="81"></rect>
+					<rect id="Rectangle-15" stroke="#979797" sketch:type="MSShapeGroup" x="320" y="179" width="80" height="20"></rect>
+					<rect id="Rectangle-16" stroke="#979797" sketch:type="MSShapeGroup" x="459" y="179" width="140" height="20"></rect>
+					<rect id="verticalPlatform" x="500" y="140" width="80" height="20"
+					style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
+					ry="5.79165"/>
+					<rect id="horizontalPlatform" x="100" y="100" width="60" height="20"
+					style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
+					ry="5.79165"/>
 
-			style="fill:rgb(111,162,247);stroke:rgb(0,0,0);stroke-width:1"/>
 
-		<text x="269px" y="56px"
-			transform="translate(269.53 56.12) scale(1.88424 1.47297) translate(-269.53 -56.12) translate(-1.32679 -1.01835)"	
-				style="fill:rgb(0,0,0);font-family:Arial;font-size:10">Go</text>
+				</g>
 
-		<polygon points="280,60 282.887,65 277.113,65"
-			transform="matrix(1.73205 0 0 1 -204.974 0) translate(280 60) scale(1 1.2) translate(-280 -60)"		
-				style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
+				<g id="sweets"/>
+			    <g id="monsters"/>
 
-		<polygon points="280,60 282.887,65 277.113,65"
-			transform="matrix(1.73205 0 0 1.2 -117.974 14) translate(-53.1162 -14.1667) translate(277.113 65) scale(1.66661 1.33333) translate(-277.113 -65) translate(0.57737 0.208333)"
-				style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
-	</g>
+				<!-- door -->
+				<g>
+					<rect id="door" x="260" y="40" width="40" height="40" style="fill:rgb(111,162,247);stroke:rgb(0,0,0);stroke-width:1"/>
 
-         <g>
+					<text x="269px" y="56px" transform="translate(269.53 56.12) scale(1.88424 1.47297) translate(-269.53 -56.12) translate(-1.32679 -1.01835)" style="fill:rgb(0,0,0);font-family:Arial;font-size:10">
+						Go
+					</text>
+
+					<polygon points="280,60 282.887,65 277.113,65" transform="matrix(1.73205 0 0 1 -204.974 0) translate(280 60) scale(1 1.2) translate(-280 -60)" style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
+
+					<polygon points="280,60 282.887,65 277.113,65" transform="matrix(1.73205 0 0 1.2 -117.974 14) translate(-53.1162 -14.1667) translate(277.113 65) scale(1.66661 1.33333) translate(-277.113 -65) translate(0.57737 0.208333)" style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
+				</g>
+	        <g>
+
 			<text id="nameBar" x="0" y="0"
 				style="fill:orange;font-size:10px;text-anchor:middle">Anonymous</text>
         </g>
         <g id="player">
 			<rect id="changeAppearance" x="0" y="0" width="40" height="40"
 				style="fill:rgb(255,255,0);stroke:rgb(0,0,0);stroke-width:1"/>
-			<ellipse cx="30" cy="10" rx="5" ry="4"
-				style="fill:rgb(36,36,24);stroke:rgb(0,0,0);stroke-width:1"/>
-			<path  d="M39.5 26.8333 L33.8333 22.8333 L25.5 26.8333 L27.5 34.5 L36.1667 36.8333"
-				style="fill:none;stroke:rgb(0,0,0);stroke-width:1"/>
-        </g>
+			<image width="40" height="40" xlink:href="data:image/gif;base64,
+				R0lGODlhKAAoAKIGAAAAAACU/zEx/zkhCIRCCP///63npa3npSH/C05FVFNDQVBFMi4wAwEAAAAh
+				+QQJFAAGACwAAAAAKAAoAAADwmi63P4wykmrvTjrzbv/YCh+QGmeZlgKRSu8b1sIpQfE8ozLL8Dd
+				rILJ1RrqfBlg8SRDuWgYYNC5NMKQFWm11GTqoFlYUMidVXnXsDj3HKPTE+n6vfvCAliIXMzv+/Fx
+				foKDL4ASe1coKH95D4g9JQMEBJImfQGGh34lk52TK3yZmn0AnpKUBHuYjRGPqJ6TYpiiFKAwpp6F
+				q6xZALMBsJK/NTYnp58nI8rLzM3OEr/RmCPS1dMe1tnX2Nrbz9/gygkAACH5BAkUAAYALAAAAAAo
+				ACgAAAO4aLrc/jDKSau9OOvNu/9gKI4kBJxoioanULxCHL+FcHrATNc6HQOcnKuAgr2KPGBGeEzR
+				VDAbRjiENpEyZYV6PT2dPOlWNiR6a1dfdkzeRcvq9YTajvfCsoDWRO77/2R6c4CEhIISdGQqi3+H
+				EYlZBJKTA5KQAY6PfyeVlZMtfZmafieUn4mYe4ibpZagMZiic5CFsTcaJ7G6u7aquIvAviXDxMUa
+				vMghyMuYHczPzc7QscbV1sMJAAAh+QQJFAAGACwAAAAAKAAoAAADtGi63P4wykmrvTjrzbv/YCiO
+				ZLkBaKqmISoUsCDLcCGgHkDX9l7LAI7uVUjFYMZeMDNEqmqr2A0zJEadydmyUsWioM/elDsjFr82
+				7E9LLvOk5jV7UnXLfeJZYAupl/+AgXt0gYWGMoMSflorK4J8D4tAAASVlgQufwGJioGNjpqQfZ6f
+				KZqchICldZuoFJmHZa04Giitt7izokyrKya/wBS5w5sfxMfFGsjLycrMt8HR0iUJAAAh+QQFFAAG
+				ACwAAAAAKAAoAAADrmi63P4wykmrvTjrzbv/YCiOJAScaIqGp1C8Qhy/hXB6wEzXOh0DnJyrgIK9
+				ijxgRnhM0VQwG0Y4hDaRMmWFej09nTzpVjYkemtXX3ZM3kXL6vWE2o73wrKA1kTu+/9kenOAhISC
+				EnRkKot/hxGJWYspfgGOj3+Sk32Wl36ZKJucnX2fgZV7FC2FoXqoFieVsbKzrR+fiyW5ursgtL4h
+				vsGVHcLFw8TGsbzLzLkJAAA7
+			"/>
+	    </g>
         <g id="bullets"/>
     </g>
-      
-      <g id="highscoretable"  style = " visibility : hidden" transform="translate(40,40)">
-        <rect width="520" height="480"
-         style="fill:white;stroke:red;stroke-width:2"/>
-        <text x="260" y="40"
-         style="fill:red;font-size:30px;font-weight:bold;text-anchor:middle">
-          High Score Table
+
+	<g id="highscoretable"  style = " visibility : hidden" transform="translate(40,40)">
+		<rect width="520" height="480" style="fill:white;stroke:red;stroke-width:2"/>
+		<text x="260" y="40" style="fill:red;font-size:30px;font-weight:bold;text-anchor:middle">
+			High Score Table
         </text>
-        <text id="highscoretext" y="45"
-         style="font-size: 20px;font-weight:bold"/>
+        <text id="highscoretext" y="45" style="font-size: 20px;font-weight:bold"/>
         <g onclick="top.again()" transform="translate(230,420)">
 			<rect x="0" y="0" width="140" height="40"
 				style="fill:white;stroke:red;stroke-width:2" />
 			<text x="60" y="20"
 				style="fill:red;font-size:22px;text-anchor:middle">Again??</text>
 		</g>
-      </g>
-    </g>
-  </g>
+	</g>
+
+</g>
+</g>
 </svg>

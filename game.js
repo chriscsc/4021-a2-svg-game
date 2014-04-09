@@ -37,8 +37,7 @@ Player.prototype.isOnPlatform = function() {
         var h = parseFloat(node.getAttribute("height"));
 
         if (((this.position.x + PLAYER_SIZE.w > x && this.position.x < x + w) ||
-             ((this.position.x + PLAYER_SIZE.w) == x && this.motion == motionType.RIGHT) ||
-             (this.position.x == (x + w) && this.motion == motionType.LEFT)) &&
+            ((this.position.x + PLAYER_SIZE.w) == x && this.motion == motionType.RIGHT) || (this.position.x == (x + w) && this.motion == motionType.LEFT)) &&
             this.position.y + PLAYER_SIZE.h == y) return true;
     }
     if (this.position.y + PLAYER_SIZE.h == SCREEN_SIZE.h) return true;
@@ -149,7 +148,7 @@ function Input(){
 	var startPage = svgdoc.getElementById("startpage");
 
 	startPage.style.setProperty("visibility", "hidden", null);
-	
+
 	var gameArea = svgdoc.getElementById("gamearea");
 
 	gameArea.style.setProperty("visibility", "visible", null);
@@ -164,8 +163,8 @@ function ready(){
 		svgdoc.getElementById("Level").firstChild.data = 1;
 		svgdoc.getElementById("TimeRemain").firstChild.data = 1;
 
-		
-	
+
+
 		var platforms = svgdoc.getElementById("platforms");
 
 		// Create a new rect element
@@ -435,17 +434,17 @@ function updateScreen() {
     var horizontalBarSpeed = parseInt(horizontalBar.getAttribute("speed"));
 
     if(parseInt(verticalBar.getAttribute("y")) == player.position.y + PLAYER_SIZE.h
-	&& player.position.x + PLAYER_SIZE.w > parseInt(verticalBar.getAttribute("x"))
-	&& player.position.x < parseInt(verticalBar.getAttribute("x")) + parseInt(verticalBar.getAttribute("width")) ){
-
-	player.position.y += verticalBarSpeed;
-     }
+		&& player.position.x + PLAYER_SIZE.w > parseInt(verticalBar.getAttribute("x"))
+		&& player.position.x < parseInt(verticalBar.getAttribute("x")) + parseInt(verticalBar.getAttribute("width")) )
+    {
+		player.position.y += verticalBarSpeed;
+    }
     if(parseInt(horizontalBar.getAttribute("y")) == player.position.y + PLAYER_SIZE.h
-	&& player.position.x + PLAYER_SIZE.w > parseInt(horizontalBar.getAttribute("x"))
-	&& player.position.x < parseInt(horizontalBar.getAttribute("x")) + parseInt(horizontalBar.getAttribute("width")) ){
-
-	player.position.x += horizontalBarSpeed;
-     }
+		&& player.position.x + PLAYER_SIZE.w > parseInt(horizontalBar.getAttribute("x"))
+		&& player.position.x < parseInt(horizontalBar.getAttribute("x")) + parseInt(horizontalBar.getAttribute("width")) )
+    {
+		player.position.x += horizontalBarSpeed;
+    }
 
     // Transform the player
     player.node.setAttribute("transform", "translate(" + player.position.x + "," + player.position.y + ")");
@@ -453,12 +452,14 @@ function updateScreen() {
     horizontalBar.setAttribute("x", parseInt(horizontalBar.getAttribute("speed")) + parseInt(horizontalBar.getAttribute("x")) );
 
 
-    if(FACE_LEFT)
+    if(FACE_LEFT){
     	player.node.setAttribute("transform","translate(" + (player.position.x + PLAYER_SIZE.w)  + "," + player.position.y + ") scale(-1, 1)");
+    }
 
-    if(parseInt(svgdoc.getElementById("HPRemain").firstChild.data) ==1)
-	svgdoc.getElementById("changeAppearance").setAttribute("style", "fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1");
-	
+    if(parseInt(svgdoc.getElementById("HPRemain").firstChild.data) ==1){
+    	svgdoc.getElementById("changeAppearance").setAttribute("style", "fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1");
+    }
+
     svgdoc.getElementById("nameBar").firstChild.data = name;
     svgdoc.getElementById("nameBar").setAttribute("x", player.position.x + PLAYER_SIZE.w/2);
     svgdoc.getElementById("nameBar").setAttribute("y", player.position.y - PLAYER_SIZE.h/2 );
@@ -491,33 +492,31 @@ function updateScreen() {
 
 
     if(zoom >1.0){
- 	sx = zoom;
+     	sx = zoom;
 
-	sy = zoom;
-
-
-	var cx = player.position.x + PLAYER_SIZE.w/2;
-	var cy = player.position.y + PLAYER_SIZE.h/2;
-	var tx = SCREEN_SIZE.w/zoom/2;
-	var ty = SCREEN_SIZE.h/zoom/2;
-
-	if(cx < SCREEN_SIZE.w/zoom/2)
-		tx = cx;
-	if(cy < SCREEN_SIZE.h/zoom/2)
-		ty = cy;
-	if(cx > SCREEN_SIZE.w - SCREEN_SIZE.w/zoom/2)
-		tx = 2 * SCREEN_SIZE.w/zoom/2 - (SCREEN_SIZE.w- cx );
-	if(cy > SCREEN_SIZE.h - SCREEN_SIZE.h/zoom/2)
-		ty = 2 * SCREEN_SIZE.h/zoom/2 - (SCREEN_SIZE.h- cy );
+    	sy = zoom;
 
 
+    	var cx = player.position.x + PLAYER_SIZE.w/2;
+    	var cy = player.position.y + PLAYER_SIZE.h/2;
+    	var tx = SCREEN_SIZE.w/zoom/2;
+    	var ty = SCREEN_SIZE.h/zoom/2;
+
+    	if(cx < SCREEN_SIZE.w/zoom/2)
+    		tx = cx;
+    	if(cy < SCREEN_SIZE.h/zoom/2)
+    		ty = cy;
+    	if(cx > SCREEN_SIZE.w - SCREEN_SIZE.w/zoom/2)
+    		tx = 2 * SCREEN_SIZE.w/zoom/2 - (SCREEN_SIZE.w- cx );
+    	if(cy > SCREEN_SIZE.h - SCREEN_SIZE.h/zoom/2)
+    		ty = 2 * SCREEN_SIZE.h/zoom/2 - (SCREEN_SIZE.h- cy );
 
 
-	svgdoc.getElementById("gamearea").setAttribute("transform", " translate(" + zoom * tx + ", " + zoom * ty + ") scale(" + sx + "," + sy + ") translate(" + -cx+ ", " + -cy + ")");
+    	svgdoc.getElementById("gamearea").setAttribute("transform", " translate(" + zoom * tx + ", " + zoom * ty + ") scale(" + sx + "," + sy + ") translate(" + -cx+ ", " + -cy + ")");
     }
-	else
+	else {
 		svgdoc.getElementById("gamearea").setAttribute("transform", "");
-
+    }
 
 }
 
@@ -566,11 +565,11 @@ function createMonster() {
 
 	monster.setAttribute("x", MONSTER_INIT_POS.x);
 	monster.setAttribute("y", MONSTER_INIT_POS.y);
-	
+
 	var MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
     while(intersect( MONSTER_INIT_POS, new Size(120,120), player.position, PLAYER_SIZE))
 		MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
-	
+
 	monster.setAttribute("Dx", MONSTER_DEST_POS.x);
 	monster.setAttribute("Dy", MONSTER_DEST_POS.y);
 	console.log(MONSTER_DEST_POS.x);
@@ -586,14 +585,14 @@ function createMonster() {
 
 
 function moveMonsters(){
-	
+
     var monsters = svgdoc.getElementById("monsters");
     for (var i = 0; i < monsters.childNodes.length; i++) {
         var node = monsters.childNodes.item(i);
 		node.setAttribute("turn", false);
-		
+
 		if( parseInt(node.getAttribute("x")) == parseInt(node.getAttribute("Dx")) && parseInt(node.getAttribute("y"))  == parseInt(node.getAttribute("Dy")) ){
-		
+
 			var MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
 			node.setAttribute("Dx", MONSTER_DEST_POS.x);
 			node.setAttribute("Dy", MONSTER_DEST_POS.y);
@@ -621,15 +620,15 @@ function moveMonsters(){
 			if(parseInt(node.getAttribute("y")) > parseInt(node.getAttribute("Dy")))
 				y_displacement *= -1;
 			node.setAttribute("y", parseInt(node.getAttribute("y")) + y_displacement);
-			
+
 			var x_displacement = 1;
 			if(parseInt(node.getAttribute("faceLeft")))
 				x_displacement *= -1;
 			node.setAttribute("x", parseInt(node.getAttribute("x")) + x_displacement);
-			
+
 			console.log(parseInt(node.getAttribute("x")));
 			console.log(parseInt(node.getAttribute("y")));
-		}		
+		}
 	}
 }
 
@@ -703,8 +702,9 @@ function collisionDetection() {
 			setTimeout("canHit = true", 500);
 
 
-	        if(temp == 0 )
+	        if(temp == 0 ){
 				gameover();
+            }
 		}
 
     }
@@ -719,23 +719,23 @@ function collisionDetection() {
         // For each bullet check if it overlaps with any monster
         // if yes, remove both the monster and the bullet
 
-         for (var j = 0; j < monsters.childNodes.length; j++) {
-		var monster = monsters.childNodes.item(j);
+        for (var j = 0; j < monsters.childNodes.length; j++) {
+    		var monster = monsters.childNodes.item(j);
 
-		var mx = parseInt(monster.getAttribute("x"));
-		var my = parseInt(monster.getAttribute("y"));
+    		var mx = parseInt(monster.getAttribute("x"));
+    		var my = parseInt(monster.getAttribute("y"));
 
 
-		if (intersect(new Point(mx,my), MONSTER_SIZE, new Point(x,y), BULLET_SIZE )) {
-			bullet.parentNode.removeChild(bullet);
-			monster.parentNode.removeChild(monster);
+    		if (intersect(new Point(mx,my), MONSTER_SIZE, new Point(x,y), BULLET_SIZE )) {
+    			bullet.parentNode.removeChild(bullet);
+    			monster.parentNode.removeChild(monster);
 
-		}
-	}
+    		}
+    	}
     }
     //Check whether a sweet is eated
-        var sweets = svgdoc.getElementById("sweets");
-	for (var i = 0; i < sweets.childNodes.length; i++) {
+    var sweets = svgdoc.getElementById("sweets");
+        for (var i = 0; i < sweets.childNodes.length; i++) {
         var sweet = sweets.childNodes.item(i);
 
         // For each monster check if it overlaps with the player
@@ -743,15 +743,14 @@ function collisionDetection() {
         var x = parseInt(sweet.getAttribute("x"));
         var y = parseInt(sweet.getAttribute("y"));
 
-	    if (intersect(new Point(x,y), SWEET_SIZE, player.position, PLAYER_SIZE) ) {
-			var temp = parseInt(svgdoc.getElementById("score").firstChild.data);
-			temp += 5 * zoom;
-			svgdoc.getElementById("score").firstChild.data = temp;
-			sweet.parentNode.removeChild(sweet);
-	     }
+        if (intersect(new Point(x,y), SWEET_SIZE, player.position, PLAYER_SIZE) ) {
+            var temp = parseInt(svgdoc.getElementById("score").firstChild.data);
+            temp += 5 * zoom;
+            svgdoc.getElementById("score").firstChild.data = temp;
+            sweet.parentNode.removeChild(sweet);
         }
+    }
 	if(sweets.childNodes.length == 0){
-
 		gameclear = true;
 	}
 }
