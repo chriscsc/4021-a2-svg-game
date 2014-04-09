@@ -37,7 +37,8 @@ Player.prototype.isOnPlatform = function() {
         var h = parseFloat(node.getAttribute("height"));
 
         if (((this.position.x + PLAYER_SIZE.w > x && this.position.x < x + w) ||
-            ((this.position.x + PLAYER_SIZE.w) == x && this.motion == motionType.RIGHT) || (this.position.x == (x + w) && this.motion == motionType.LEFT)) &&
+            ((this.position.x + PLAYER_SIZE.w) == x && this.motion == motionType.RIGHT) ||
+            (this.position.x == (x + w) && this.motion == motionType.LEFT)) &&
             this.position.y + PLAYER_SIZE.h == y) return true;
     }
     if (this.position.y + PLAYER_SIZE.h == SCREEN_SIZE.h) return true;
@@ -272,18 +273,18 @@ function keydown(evt) {
     var keyCode = (evt.keyCode)? evt.keyCode : evt.getKeyCode();
 
     switch (keyCode) {
-        case "A".charCodeAt(0):
+        case "N".charCodeAt(0):
             player.motion = motionType.LEFT;
             break;
 
-        case "D".charCodeAt(0):
+        case "M".charCodeAt(0):
             player.motion = motionType.RIGHT;
             break;
 
 
         // Add your code here
 
-        case "W".charCodeAt(0):
+        case "Z".charCodeAt(0):
             if (player.isOnPlatform()) {
     		player.verticalSpeed = 20;
 		}
@@ -310,11 +311,11 @@ function keyup(evt) {
     var keyCode = (evt.keyCode)? evt.keyCode : evt.getKeyCode();
 
     switch (keyCode) {
-        case "A".charCodeAt(0):
+        case "N".charCodeAt(0):
             if (player.motion == motionType.LEFT) player.motion = motionType.NONE;
             break;
 
-        case "D".charCodeAt(0):
+        case "M".charCodeAt(0):
             if (player.motion == motionType.RIGHT) player.motion = motionType.NONE;
             break;
 
