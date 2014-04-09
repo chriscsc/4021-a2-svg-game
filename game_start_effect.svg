@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version="1.1"
+     baseProfile="full"
+     width="400" height="400">
+
+    <defs>
+        <clipPath id="effect_clip">
+            <rect x="200" y="200" width="0" height="0">
+                <animate id="effect" attributeName="x" attributeType="XML"
+                         values="200;0"
+                         begin="start.click" dur="3s" fill="freeze"/>
+                <animate attributeName="y" attributeType="XML"
+                         values="200;0"
+                         begin="effect.begin" dur="3s" fill="freeze"/>
+                <animate attributeName="width" attributeType="XML"
+                         values="0;400"
+                         begin="effect.begin" dur="3s" fill="freeze"/>
+                <animate attributeName="height" attributeType="XML"
+                         values="0;400"
+                         begin="effect.begin" dur="3s" fill="freeze"/>
+            </rect>
+        </clipPath>
+    </defs>
+    <g id="start">
+        <rect x="0" y="0" width="400" height="400"
+              style="stroke: none; fill: yellow"/>
+        <text x="0" y="175" style="font-size: 50px; text-anchor: middle">
+            <tspan x="200">I am the</tspan>
+            <tspan x="200" dy="50">starting screen!</tspan>
+        </text>
+        <text x="200" y="380" style="font-size: 15px; text-anchor: middle">
+            Click anywhere to start the game start effect
+        </text>
+    </g>
+    <g id="game_area" style="clip-path: url(#effect_clip)">
+        <rect x="0" y="0" width="400" height="400"
+              style="stroke: none; fill: red"/>
+        <text x="0" y="75" style="font-size: 50px; text-anchor: middle">
+            <tspan x="200">I am the</tspan>
+            <tspan x="200" dy="50">game area!</tspan>
+        </text>
+    </g>
+</svg>
