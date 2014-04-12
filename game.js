@@ -146,14 +146,6 @@ function Input(){
 	name = prompt("Enter your name ");
 	if(name.length == 0)
 		name = "Anonymous";
-	var startPage = svgdoc.getElementById("startpage");
-
-	startPage.style.setProperty("visibility", "hidden", null);
-
-	var gameArea = svgdoc.getElementById("gamearea");
-
-	gameArea.style.setProperty("visibility", "visible", null);
-
 	ready();
 }
 

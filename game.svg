@@ -8,13 +8,22 @@
      onload="top.load(evt)">
 
 	<defs>
+		<clipPath id="gameareaclip">
+			<rect x="800" y="600" width="0" height="0">
+				<animate id="effect" attributeName="x" attributeType="XML" values="400;0"
+					begin="norm.click;zoom.click" dur="3s" fill="freeze"/>
+				<animate attributeName="y" attributeType="XML" values="300;0"
+					begin="effect.begin" dur="3s" fill="freeze"/>
+				<animate attributeName="width" attributeType="XML" values="0;800"
+					begin="effect.begin" dur="3s" fill="freeze"/>
+				<animate attributeName="height" attributeType="XML" values="0;600"
+					begin="effect.begin" dur="3s" fill="freeze"/>
+			</rect>
+		</clipPath>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
             <stop stop-color="#FFDA4E" offset="0%"></stop>
             <stop stop-color="#FF5900" offset="100%"></stop>
         </linearGradient>
-	    <clipPath id="gameareaclip">
-	      <rect x="20" y="20" width="600" height="560"/>
-	    </clipPath>
 		<g id="bullet">
 			<circle cx="5" cy="5" r="5" style="fill:red"/>
 			<circle cx="6" cy="3" r="1" style="fill:pink"/>
@@ -83,69 +92,9 @@
 		</g>
 	</defs>
 
-	<rect width="100%" height="100%" style="fill:url(#background_pattern);stroke:orange;stroke-width:4" />
 
-	<rect x="20" y="20" width="600" height="560" style="fill:black;stroke:red;stroke-width:5" />
-
-
-
-	<!-- Score -->
-	<g transform="translate(640, 120)">
-		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-			Score:
-		</text>
-		<rect x="0" y="10" width="140" height="35" style="fill:white" />
-		<text id="score" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
-			0
-		</text>
-	</g>
-
-
-	<!-- Bullet remain -->
-	<g transform="translate(640, 190)">
-		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-			Bullet Remain:
-		</text>
-		<rect x="0" y="10" width="140" height="35" style="fill:white" />
-		<text id="bulletRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
-			8
-		</text>
-	</g>
-
-	<!-- HP -->
-	<g transform="translate(640, 260)">
-		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-			HP Remain:
-		</text>
-		<rect x="0" y="10" width="140" height="35" style="fill:white" />
-		<text id="HPRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
-			2
-		</text>
-	</g>
-
-	<!-- Level -->
-	<g transform="translate(640, 330)">
-		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-			Level:
-		</text>
-		<rect x="0" y="10" width="140" height="35" style="fill:white" />
-		<text id="Level" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
-			1
-		</text>
-	</g>
-
-	<!-- Time -->
-	<g transform="translate(640, 400)">
-		<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
-			Time:
-		</text>
-		<rect x="0" y="10" width="140" height="35" style="fill:white" />
-		<text id="TimeRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
-			60
-		</text>
-	</g>
-
-	<g id="startpage" transform="translate(0,0)" width="800" height="600" style = " visibility : visible">
+	<!-- Start page -->
+	<g id="startpage" transform="translate(0,0)" width="800" height="600">
         <rect id="Rectangle-1" stroke="#979797" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup" x="0" y="0" width="800" height="600"></rect>
         <text id="You-are-super-biscui" fill="#FFFFFF" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="24" font-weight="normal">
             <tspan x="66.5" y="213" fill="#FFFFFF">You are super biscuits lover, and some monsters are stealing </tspan>
@@ -158,16 +107,16 @@
             <tspan x="66.5" y="416" fill="#FFFFFF"></tspan>
         </text>
 
-		<g onclick="top.zoomMode()" >
+		<g id="zoom" onclick="top.zoomMode()" >
 	        <rect id="Rectangle-1" stroke="#4990E2" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="500" y="450" width="150" height="40" rx="8"></rect>
-	        <text id="Normal-Mode" fill="#4990E2" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="18" font-weight="normal">
+	        <text id="Zoom-Mode" fill="#4990E2" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="18" font-weight="normal">
 	            <tspan x="526" y="477" fill="#000000">
 	            	Zoom Mode
 	            </tspan>
 	        </text>
   		</g>
 
-  		<g onclick="top.normalMode()" >
+  		<g id="norm" onclick="top.normalMode()" >
 	        <rect id="Rectangle-1" stroke="#4990E2" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" x="200" y="450" width="150" height="40" rx="8"></rect>
 	        <text id="Normal-Mode" fill="#4990E2" sketch:type="MSTextLayer" font-family="Helvetica Neue" font-size="18" font-weight="normal">
 	            <tspan x="220" y="477" fill="#000000">
@@ -177,16 +126,77 @@
   		</g>
 	</g>
 
-	<g style="clip-path:url(#gameareaclip)">
-		<g transform="translate(20,20)">
-			<g id="gamearea" transform="translate(0,0)" width="600" height="560" style = " visibility : hidden">
+	<g id="game" style="clip-path:url(#gameareaclip)">
 
-				<rect x="0" y="0" width="600" height="560" style="fill:white" />
+		<rect width="800" height="600" style="fill:url(#background_pattern);stroke:orange;stroke-width:4" />
+		<rect x="20" y="20" width="600" height="560" style="fill:black;stroke:red;stroke-width:5" />
+
+		<!-- Score -->
+		<g transform="translate(640, 120)">
+			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+				Score:
+			</text>
+			<rect x="0" y="10" width="140" height="35" style="fill:white" />
+			<text id="score" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+				0
+			</text>
+		</g>
+
+
+		<!-- Bullet remain -->
+		<g transform="translate(640, 190)">
+			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+				Bullet Remain:
+			</text>
+			<rect x="0" y="10" width="140" height="35" style="fill:white" />
+			<text id="bulletRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+				8
+			</text>
+		</g>
+
+		<!-- HP -->
+		<g transform="translate(640, 260)">
+			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+				HP Remain:
+			</text>
+			<rect x="0" y="10" width="140" height="35" style="fill:white" />
+			<text id="HPRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+				2
+			</text>
+		</g>
+
+		<!-- Level -->
+		<g transform="translate(640, 330)">
+			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+				Level:
+			</text>
+			<rect x="0" y="10" width="140" height="35" style="fill:white" />
+			<text id="Level" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+				1
+			</text>
+		</g>
+
+		<!-- Time -->
+		<g transform="translate(640, 400)">
+			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+				Time:
+			</text>
+			<rect x="0" y="10" width="140" height="35" style="fill:white" />
+			<text id="TimeRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+				60
+			</text>
+		</g>
+
+
+		<!-- Move Area -->
+		<g transform="translate(20,20)">
+			<g id="gamearea" transform="translate(0,0)" width="600" height="560">
+			<rect x="0" y="0" width="600" height="560" style="fill:white" />
 
 
 				<g id="platforms">
 
-					<!-- Add your platforms here -->>>
+					<!-- Add your platforms here -->
 			        <rect id="Rectangle-1" fill="#8B572A" sketch:type="MSShapeGroup" x="0" y="500" width="600" height="60"></rect>
 			        <rect id="Rectangle-2" fill="#8B572A" sketch:type="MSShapeGroup" x="0" y="460" width="160" height="100"></rect>
 			        <rect id="Rectangle-3" fill="#8B572A" sketch:type="MSShapeGroup" x="0" y="420" width="120" height="80"></rect>
@@ -206,12 +216,14 @@
 					<rect id="verticalPlatform" x="500" y="140" width="80" height="20"
 					style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
 					ry="5.79165"/>
-
-
 				</g>
 
-				<g id="sweets"/>
-			    <g id="monsters"/>
+				<!-- Player -->
+				<text id="nameBar" x="0" y="0" style="fill:orange;font-size:10px;text-anchor:middle">Anonymous</text>
+		        <g id="player">
+			        <path d="M33.4968464,34.3091483 C29.9454156,37.8258665 25.0454258,40 19.6341463,40 C8.7905062,40 0,31.2695532 0,20.5 C0,9.73044685 8.7905062,1 19.6341463,1 C29.5248743,1 37.7074617,8.26344738 39.0692119,17.7125769 C37.6678862,17.7101255 29.2484962,17.8546726 25.9941482,21.6142006 C22.4390244,25.7211947 28.7392169,32.9500589 32.4007337,33.6893151 C32.9122274,33.7925851 33.2632569,34.0175381 33.4968464,34.3091483 Z" id="Oval-1" stroke="#F8E81C" fill="#F8E81C" sketch:type="MSShapeGroup"></path>
+			        <circle id="Oval-2" stroke="#979797" fill="#000000" sketch:type="MSShapeGroup" cx="27.5" cy="12.5" r="5.5"></circle>
+			    </g>
 
 				<!-- door -->
 				<g>
@@ -225,31 +237,28 @@
 
 					<polygon points="280,60 282.887,65 277.113,65" transform="matrix(1.73205 0 0 1.2 -117.974 14) translate(-53.1162 -14.1667) translate(277.113 65) scale(1.66661 1.33333) translate(-277.113 -65) translate(0.57737 0.208333)" style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
 				</g>
-	        <g>
+			    
+		        <g id="bullets"/>
+				<g id="sweets"/>
+			    <g id="monsters"/>
 
-			<text id="nameBar" x="0" y="0"
-				style="fill:orange;font-size:10px;text-anchor:middle">Anonymous</text>
+				<g id="highscoretable"  style = " visibility : hidden" transform="translate(40,40)">
+					<rect width="520" height="480" style="fill:white;stroke:red;stroke-width:2"/>
+					<text x="260" y="40" style="fill:red;font-size:30px;font-weight:bold;text-anchor:middle">
+						High Score Table
+			        </text>
+			        <text id="highscoretext" y="45" style="font-size: 20px;font-weight:bold"/>
+			        <g onclick="top.again()" transform="translate(230,420)">
+						<rect x="0" y="0" width="140" height="40"
+							style="fill:white;stroke:red;stroke-width:2" />
+						<text x="60" y="20"
+							style="fill:red;font-size:22px;text-anchor:middle">Again??</text>
+					</g>
+				</g>
+	        <g>
         </g>
-        <g id="player">
-	        <path d="M33.4968464,34.3091483 C29.9454156,37.8258665 25.0454258,40 19.6341463,40 C8.7905062,40 0,31.2695532 0,20.5 C0,9.73044685 8.7905062,1 19.6341463,1 C29.5248743,1 37.7074617,8.26344738 39.0692119,17.7125769 C37.6678862,17.7101255 29.2484962,17.8546726 25.9941482,21.6142006 C22.4390244,25.7211947 28.7392169,32.9500589 32.4007337,33.6893151 C32.9122274,33.7925851 33.2632569,34.0175381 33.4968464,34.3091483 Z" id="Oval-1" stroke="#F8E81C" fill="#F8E81C" sketch:type="MSShapeGroup"></path>
-	        <circle id="Oval-2" stroke="#979797" fill="#000000" sketch:type="MSShapeGroup" cx="27.5" cy="12.5" r="5.5"></circle>
-	    </g>
-        <g id="bullets"/>
     </g>
 
-	<g id="highscoretable"  style = " visibility : hidden" transform="translate(40,40)">
-		<rect width="520" height="480" style="fill:white;stroke:red;stroke-width:2"/>
-		<text x="260" y="40" style="fill:red;font-size:30px;font-weight:bold;text-anchor:middle">
-			High Score Table
-        </text>
-        <text id="highscoretext" y="45" style="font-size: 20px;font-weight:bold"/>
-        <g onclick="top.again()" transform="translate(230,420)">
-			<rect x="0" y="0" width="140" height="40"
-				style="fill:white;stroke:red;stroke-width:2" />
-			<text x="60" y="20"
-				style="fill:red;font-size:22px;text-anchor:middle">Again??</text>
-		</g>
-	</g>
 
 </g>
 </g>
