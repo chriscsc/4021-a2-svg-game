@@ -186,23 +186,23 @@
 
 				<g id="platforms">
 
-					<!-- Add your platforms here -->
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="259" y="459" width="80" height="40"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="239" y="139" width="80" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="239" y="239" width="80" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-1" y="379" width="201" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-1" y="379" width="201" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-1" y="499" width="201" height="60"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="399" y="499" width="200" height="60"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="199" y="539" width="200" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-2" y="279" width="201" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-2" y="179" width="201" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="-2" y="79" width="201" height="20"></rect>
-					<rect id="Rectangle-1" stroke="#979797" sketch:type="MSShapeGroup" x="238" y="339" width="80" height="20"></rect>
-					<rect id="Rectangle-13" stroke="#979797" sketch:type="MSShapeGroup" x="300" y="159" width="20" height="80"></rect>
-					<rect id="Rectangle-14" stroke="#979797" sketch:type="MSShapeGroup" x="239" y="259" width="20" height="81"></rect>
-					<rect id="Rectangle-15" stroke="#979797" sketch:type="MSShapeGroup" x="320" y="179" width="80" height="20"></rect>
-					<rect id="Rectangle-16" stroke="#979797" sketch:type="MSShapeGroup" x="459" y="179" width="140" height="20"></rect>
+					<!-- Add your platforms here -->>>
+			        <rect id="Rectangle-1" fill="#8B572A" sketch:type="MSShapeGroup" x="0" y="500" width="600" height="60"></rect>
+			        <rect id="Rectangle-2" fill="#8B572A" sketch:type="MSShapeGroup" x="0" y="460" width="160" height="100"></rect>
+			        <rect id="Rectangle-3" fill="#8B572A" sketch:type="MSShapeGroup" x="0" y="420" width="120" height="80"></rect>
+			        <rect id="Rectangle-4" fill="#8B572A" sketch:type="MSShapeGroup" x="440" y="460" width="160" height="100"></rect>
+			        <rect id="Rectangle-5" fill="#8B572A" sketch:type="MSShapeGroup" x="481" y="420" width="120" height="80"></rect>
+			        <rect id="Rectangle-6" fill="#4A4A4A" sketch:type="MSShapeGroup" x="200" y="381" width="201" height="20"></rect>
+			        <rect id="Rectangle-7" fill="#4A4A4A" sketch:type="MSShapeGroup" x="200" y="300" width="201" height="21"></rect>
+			        <rect id="Rectangle-8" fill="#4A4A4A" sketch:type="MSShapeGroup" x="200" y="220" width="201" height="20"></rect>
+			        <rect id="Rectangle-9" fill="#4A4A4A" sketch:type="MSShapeGroup" x="200" y="140" width="201" height="20"></rect>
+			        <rect id="Rectangle-10" fill="#4A4A4A" sketch:type="MSShapeGroup" x="200" y="60" width="201" height="20"></rect>
+			        <rect id="Rectangle-11" fill="#B8E986" sketch:type="MSShapeGroup" x="0" y="60" width="100" height="20"></rect>
+			        <rect id="Rectangle-12" fill="#B8E986" sketch:type="MSShapeGroup" x="0" y="220" width="100" height="20"></rect>
+			        <rect id="Rectangle-13" fill="#B8E986" sketch:type="MSShapeGroup" x="500" y="60" width="100" height="20"></rect>
+			        <rect id="Rectangle-14" fill="#B8E986" sketch:type="MSShapeGroup" x="500" y="140" width="100" height="20"></rect>
+			        <rect id="Rectangle-15" fill="#B8E986" sketch:type="MSShapeGroup" x="500" y="220" width="100" height="20"></rect>
+
 					<rect id="verticalPlatform" x="500" y="140" width="80" height="20"
 					style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
 					ry="5.79165"/>
@@ -234,26 +234,8 @@
 				style="fill:orange;font-size:10px;text-anchor:middle">Anonymous</text>
         </g>
         <g id="player">
-			<rect id="changeAppearance" x="0" y="0" width="40" height="40"
-				style="fill:rgb(255,255,0);stroke:rgb(0,0,0);stroke-width:1"/>
-			<image width="40" height="40" xlink:href="data:image/gif;base64,
-				R0lGODlhKAAoAKIGAAAAAACU/zEx/zkhCIRCCP///63npa3npSH/C05FVFNDQVBFMi4wAwEAAAAh
-				+QQJFAAGACwAAAAAKAAoAAADwmi63P4wykmrvTjrzbv/YCh+QGmeZlgKRSu8b1sIpQfE8ozLL8Dd
-				rILJ1RrqfBlg8SRDuWgYYNC5NMKQFWm11GTqoFlYUMidVXnXsDj3HKPTE+n6vfvCAliIXMzv+/Fx
-				foKDL4ASe1coKH95D4g9JQMEBJImfQGGh34lk52TK3yZmn0AnpKUBHuYjRGPqJ6TYpiiFKAwpp6F
-				q6xZALMBsJK/NTYnp58nI8rLzM3OEr/RmCPS1dMe1tnX2Nrbz9/gygkAACH5BAkUAAYALAAAAAAo
-				ACgAAAO4aLrc/jDKSau9OOvNu/9gKI4kBJxoioanULxCHL+FcHrATNc6HQOcnKuAgr2KPGBGeEzR
-				VDAbRjiENpEyZYV6PT2dPOlWNiR6a1dfdkzeRcvq9YTajvfCsoDWRO77/2R6c4CEhIISdGQqi3+H
-				EYlZBJKTA5KQAY6PfyeVlZMtfZmafieUn4mYe4ibpZagMZiic5CFsTcaJ7G6u7aquIvAviXDxMUa
-				vMghyMuYHczPzc7QscbV1sMJAAAh+QQJFAAGACwAAAAAKAAoAAADtGi63P4wykmrvTjrzbv/YCiO
-				ZLkBaKqmISoUsCDLcCGgHkDX9l7LAI7uVUjFYMZeMDNEqmqr2A0zJEadydmyUsWioM/elDsjFr82
-				7E9LLvOk5jV7UnXLfeJZYAupl/+AgXt0gYWGMoMSflorK4J8D4tAAASVlgQufwGJioGNjpqQfZ6f
-				KZqchICldZuoFJmHZa04Giitt7izokyrKya/wBS5w5sfxMfFGsjLycrMt8HR0iUJAAAh+QQFFAAG
-				ACwAAAAAKAAoAAADrmi63P4wykmrvTjrzbv/YCiOJAScaIqGp1C8Qhy/hXB6wEzXOh0DnJyrgIK9
-				ijxgRnhM0VQwG0Y4hDaRMmWFej09nTzpVjYkemtXX3ZM3kXL6vWE2o73wrKA1kTu+/9kenOAhISC
-				EnRkKot/hxGJWYspfgGOj3+Sk32Wl36ZKJucnX2fgZV7FC2FoXqoFieVsbKzrR+fiyW5ursgtL4h
-				vsGVHcLFw8TGsbzLzLkJAAA7
-			"/>
+	        <path d="M33.4968464,34.3091483 C29.9454156,37.8258665 25.0454258,40 19.6341463,40 C8.7905062,40 0,31.2695532 0,20.5 C0,9.73044685 8.7905062,1 19.6341463,1 C29.5248743,1 37.7074617,8.26344738 39.0692119,17.7125769 C37.6678862,17.7101255 29.2484962,17.8546726 25.9941482,21.6142006 C22.4390244,25.7211947 28.7392169,32.9500589 32.4007337,33.6893151 C32.9122274,33.7925851 33.2632569,34.0175381 33.4968464,34.3091483 Z" id="Oval-1" stroke="#F8E81C" fill="#F8E81C" sketch:type="MSShapeGroup"></path>
+	        <circle id="Oval-2" stroke="#979797" fill="#000000" sketch:type="MSShapeGroup" cx="27.5" cy="12.5" r="5.5"></circle>
 	    </g>
         <g id="bullets"/>
     </g>

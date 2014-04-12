@@ -293,7 +293,7 @@ function keydown(evt) {
 	case 32: // spacebar = shoot
         	if (canShoot) shootBullet();
         	break;
-	case "C".charCodeAt(0):
+	case "C".cheatmodearCodeAt(0):
             if (cheatmode)
 		cheatmode = false;
 	    else
@@ -358,12 +358,6 @@ function gamePlay() {
         if (player.verticalSpeed <= 0)
             player.verticalSpeed = 0;
     }
-
-
-
-
-
-
 
 	var platforms = svgdoc.getElementById("platforms");
 	if(isOnPlatform && platforms.childNodes.length > 31){
@@ -637,27 +631,27 @@ function moveMonsters(){
 function shootBullet() {
 
     if(parseInt(svgdoc.getElementById("bulletRemain").firstChild.data)>0 || cheatmode){
-    // Disable shooting for a short period of time
-	canShoot = false;
-	setTimeout("canShoot = true", SHOOT_INTERVAL);
+        // Disable shooting for a short period of time
+        canShoot = false;
+        setTimeout("canShoot = true", SHOOT_INTERVAL);
 
-    // Create the bullet by createing a use node
-	var bullet= svgdoc.createElementNS("http://www.w3.org/2000/svg", "use");
+        // Create the bullet by createing a use node
+        var bullet= svgdoc.createElementNS("http://www.w3.org/2000/svg", "use");
 
-    // Calculate and set the position of the bullet
-	bullet.setAttribute("x", player.position.x + PLAYER_SIZE.w/2 );
-	bullet.setAttribute("y", player.position.y + PLAYER_SIZE.h/2 );
-	bullet.setAttribute("speed",FACE_LEFT? -10:10);
-    // Set the href of the use node to the bullet defined in the defs node
-	bullet.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#bullet");
+        // Calculate and set the position of the bullet
+        bullet.setAttribute("x", player.position.x + PLAYER_SIZE.w/2 );
+        bullet.setAttribute("y", player.position.y + PLAYER_SIZE.h/2 );
+        bullet.setAttribute("speed",FACE_LEFT? -10:10);
+        // Set the href of the use node to the bullet defined in the defs node
+        bullet.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#bullet");
 
-    // Append the bullet to the bullet group
-	svgdoc.getElementById("bullets").appendChild(bullet);
+        // Append the bullet to the bullet group
+        svgdoc.getElementById("bullets").appendChild(bullet);
 
-	if(!cheatmode){
-		var temp = parseInt(svgdoc.getElementById("bulletRemain").firstChild.data) - 1;
-		svgdoc.getElementById("bulletRemain").firstChild.data = temp;
-	}
+        if(!cheatmode){
+        	var temp = parseInt(svgdoc.getElementById("bulletRemain").firstChild.data) - 1;
+        	svgdoc.getElementById("bulletRemain").firstChild.data = temp;
+        }
     }
 }
 
