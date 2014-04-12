@@ -243,7 +243,6 @@ function startgame(){
 	TimeInterval = setTimeout("decreaseTime()", 1000);
 	gameclear = false;
 	svgdoc.getElementById("verticalPlatform").setAttribute("speed",2);
-	svgdoc.getElementById("horizontalPlatform").setAttribute("speed",2);
 	svgdoc.getElementById("TimeRemain").firstChild.data = 60;
 	svgdoc.getElementById("bulletRemain").firstChild.data = 8;
 
@@ -419,14 +418,8 @@ function updateScreen() {
     else if(parseInt(verticalBar.getAttribute("y")) == 140)
 	verticalBar.setAttribute("speed", 2 );
 
-    var horizontalBar = svgdoc.getElementById("horizontalPlatform");
-    if(parseInt(horizontalBar.getAttribute("x")) == 400 )
-	horizontalBar.setAttribute("speed", -2 );
-    else if(parseInt(horizontalBar.getAttribute("x")) == 100)
-	horizontalBar.setAttribute("speed", 2 );
 
     var verticalBarSpeed = parseInt(verticalBar.getAttribute("speed"));
-    var horizontalBarSpeed = parseInt(horizontalBar.getAttribute("speed"));
 
     if(parseInt(verticalBar.getAttribute("y")) == player.position.y + PLAYER_SIZE.h
 		&& player.position.x + PLAYER_SIZE.w > parseInt(verticalBar.getAttribute("x"))
@@ -434,17 +427,10 @@ function updateScreen() {
     {
 		player.position.y += verticalBarSpeed;
     }
-    if(parseInt(horizontalBar.getAttribute("y")) == player.position.y + PLAYER_SIZE.h
-		&& player.position.x + PLAYER_SIZE.w > parseInt(horizontalBar.getAttribute("x"))
-		&& player.position.x < parseInt(horizontalBar.getAttribute("x")) + parseInt(horizontalBar.getAttribute("width")) )
-    {
-		player.position.x += horizontalBarSpeed;
-    }
 
     // Transform the player
     player.node.setAttribute("transform", "translate(" + player.position.x + "," + player.position.y + ")");
     verticalBar.setAttribute("y", parseInt(verticalBar.getAttribute("speed")) + parseInt(verticalBar.getAttribute("y")) );
-    horizontalBar.setAttribute("x", parseInt(horizontalBar.getAttribute("speed")) + parseInt(horizontalBar.getAttribute("x")) );
 
 
     if(FACE_LEFT){

@@ -206,9 +206,6 @@
 					<rect id="verticalPlatform" x="500" y="140" width="80" height="20"
 					style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
 					ry="5.79165"/>
-					<rect id="horizontalPlatform" x="100" y="100" width="60" height="20"
-					style="fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1" rx="5.79165"
-					ry="5.79165"/>
 
 
 				</g>
