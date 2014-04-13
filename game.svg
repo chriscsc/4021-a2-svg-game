@@ -11,13 +11,13 @@
 		<clipPath id="gameareaclip">
 			<rect x="800" y="600" width="0" height="0">
 				<animate id="effect" attributeName="x" attributeType="XML" values="400;0"
-					begin="norm.click;zoom.click" dur="3s" fill="freeze"/>
+					begin="norm.click;zoom.click" dur="1s" fill="freeze"/>
 				<animate attributeName="y" attributeType="XML" values="300;0"
-					begin="effect.begin" dur="3s" fill="freeze"/>
+					begin="effect.begin" dur="1s" fill="freeze"/>
 				<animate attributeName="width" attributeType="XML" values="0;800"
-					begin="effect.begin" dur="3s" fill="freeze"/>
+					begin="effect.begin" dur="1s" fill="freeze"/>
 				<animate attributeName="height" attributeType="XML" values="0;600"
-					begin="effect.begin" dur="3s" fill="freeze"/>
+					begin="effect.begin" dur="1s" fill="freeze"/>
 			</rect>
 		</clipPath>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
@@ -320,7 +320,7 @@
 						High Score Table
 			        </text>
 			        <text id="highscoretext" y="45" style="font-size: 20px;font-weight:bold"/>
-			        <g onclick="top.again()" transform="translate(230,420)">
+			        <g onclick="top.restart()" transform="translate(230,420)">
 						<rect x="0" y="0" width="140" height="40"
 							style="fill:white;stroke:red;stroke-width:2" />
 						<text x="60" y="20"

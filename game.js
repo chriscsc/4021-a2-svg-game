@@ -378,7 +378,7 @@ function newLevel(){
     startgame();
 }
 
-function again(){
+function restart(){
     choosed = false;
     var bullets = svgdoc.getElementById("bullets");
     while(bullets.childNodes.length > 0) {
@@ -919,7 +919,7 @@ function collisionDetection() {
 }
 
 function gameover(){
-
+    zoom = 1.0;
 	clearInterval(gameInterval);
 	clearTimeout(TimeInterval);
 	var table = getHighScoreTable();
