@@ -473,6 +473,14 @@ function createMonster() {
     var monster = new Monster();
 }
 
+function decreaseTime(){
+    svgdoc.getElementById("TimeRemain").firstChild.data = parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) -1;
+    if(parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) == 0)
+        gameover();
+    else
+        TimeInterval = setTimeout("decreaseTime()",1000);
+}
+
 //
 // This function removes all/certain nodes under a group
 //
@@ -796,7 +804,6 @@ function moveMonsters(){
 	}
 }
 
-
 function shootBullet() {
 
     if(parseInt(svgdoc.getElementById("bulletRemain").firstChild.data)>0 || cheatmode){
@@ -935,11 +942,4 @@ function gameover(){
 	showHighScoreTable(table);
 }
 
-function decreaseTime(){
-	svgdoc.getElementById("TimeRemain").firstChild.data = parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) -1;
-	if(parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) == 0)
-		gameover();
-	else
-		TimeInterval = setTimeout("decreaseTime()",1000);
-}
 
