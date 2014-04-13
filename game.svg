@@ -40,8 +40,8 @@
 		........::::......:::::::..:::::::::..:::::..:::::..::::::::..:::::........::..:::::..::..::::..: -->:
 
 	    <pattern id="background_pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-	      <rect width="20" height="20" fill="#FFFFFF"/>
-	      <circle cx="10" cy="10" r="8" fill="#FFFFFF"/>
+	      <rect width="20" height="20" fill="#FF9500"/>
+	      <circle cx="10" cy="10" r="8" fill="#FF5E3A"/>
 	    </pattern>
 
 	    <radialGradient id="player_color">
@@ -195,11 +195,11 @@
 
 		<!-- Score -->
 		<g transform="translate(640, 120)">
-			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			<text x="70" y="0" style="fill:white;font-size:25px;font-weight:bold;text-anchor:middle" font-family="Helvetica Neue">
 				Score:
 			</text>
 			<rect x="0" y="10" width="140" height="35" style="fill:white" />
-			<text id="score" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			<text id="score" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle" font-family="Helvetica Neue">
 				0
 			</text>
 		</g>
@@ -207,44 +207,44 @@
 
 		<!-- Bullet remain -->
 		<g transform="translate(640, 190)">
-			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			<text x="70" y="0" style="fill:white;font-size:25px;font-weight:bold;text-anchor:middle" font-family="Helvetica Neue">
 				Bullet Remain:
 			</text>
 			<rect x="0" y="10" width="140" height="35" style="fill:white" />
-			<text id="bulletRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			<text id="bulletRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle" font-family="Helvetica Neue">
 				8
 			</text>
 		</g>
 
 		<!-- HP -->
 		<g transform="translate(640, 260)">
-			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			<text x="70" y="0" style="fill:white;font-size:25px;font-weight:bold;text-anchor:middle" font-family="Helvetica Neue">
 				HP Remain:
 			</text>
 			<rect x="0" y="10" width="140" height="35" style="fill:white" />
-			<text id="HPRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			<text id="HPRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle" font-family="Helvetica Neue">
 				2
 			</text>
 		</g>
 
 		<!-- Level -->
 		<g transform="translate(640, 330)">
-			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			<text x="70" y="0" style="fill:white;font-size:25px;font-weight:bold;text-anchor:middle" font-family="Helvetica Neue">
 				Level:
 			</text>
 			<rect x="0" y="10" width="140" height="35" style="fill:white" />
-			<text id="Level" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			<text id="Level" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle" font-family="Helvetica Neue">
 				1
 			</text>
 		</g>
 
 		<!-- Time -->
 		<g transform="translate(640, 400)">
-			<text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+			<text x="70" y="0" style="fill:white;font-size:25px;font-weight:bold;text-anchor:middle" font-family="Helvetica Neue">
 				Time:
 			</text>
 			<rect x="0" y="10" width="140" height="35" style="fill:white" />
-			<text id="TimeRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">
+			<text id="TimeRemain" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle" font-family="Helvetica Neue">
 				60
 			</text>
 		</g>
