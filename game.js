@@ -15,6 +15,78 @@ function intersect(pos1, size1, pos2, size2) {
             pos1.y < pos2.y + size2.h && pos1.y + size1.h > pos2.y);
 }
 
+// :'######:::'#######::'##::: ##::'######::'########:
+// '##... ##:'##.... ##: ###:: ##:'##... ##:... ##..::
+//  ##:::..:: ##:::: ##: ####: ##: ##:::..::::: ##::::
+//  ##::::::: ##:::: ##: ## ## ##:. ######::::: ##::::
+//  ##::::::: ##:::: ##: ##. ####::..... ##:::: ##::::
+//  ##::: ##: ##:::: ##: ##:. ###:'##::: ##:::: ##::::
+// . ######::. #######:: ##::. ##:. ######::::: ##::::
+// :......::::.......:::..::::..:::......::::::..:::::
+
+//
+// Below are constants used in the game
+//
+var PLAYER_SIZE = new Size(40, 40);         // The size of the player
+var SCREEN_SIZE = new Size(600, 560);       // The size of the game screen
+var PLAYER_INIT_POS  = new Point(0, 0);     // The initial position of the player
+
+var MOVE_DISPLACEMENT = 5;                  // The speed of the player in motion
+var JUMP_SPEED = 15;                        // The speed of the player jumping
+var VERTICAL_DISPLACEMENT = 1;              // The displacement of vertical speed
+
+var GAME_INTERVAL = 25;                     // The time interval of running the game
+
+
+
+// '##::::'##::::'###::::'########::
+//  ##:::: ##:::'## ##::: ##.... ##:
+//  ##:::: ##::'##:. ##:: ##:::: ##:
+//  ##:::: ##:'##:::. ##: ########::
+// . ##:: ##:: #########: ##.. ##:::
+// :. ## ##::: ##.... ##: ##::. ##::
+// ::. ###:::: ##:::: ##: ##:::. ##:
+// :::...:::::..:::::..::..:::::..::
+//
+// Variables in the game
+//
+var motionType = {NONE:0, LEFT:1, RIGHT:2}; // Motion enum
+
+var svgdoc = null;                          // SVG root document node
+var player = null;                          // The player object
+var gameInterval = null;                    // The interval
+var zoom = 1.0;                             // The zoom level of the screen
+
+var MONSTER_SIZE = new Size(40 , 40);
+var SWEET_SIZE = new Size(40,40);
+
+var BULLET_SIZE = new Size(10, 10); // The size of a bullet
+var BULLET_SPEED = 10.0;            // The speed of a bullet
+                                    //  = pixels it moves each game loop
+var SHOOT_INTERVAL = 200.0;         // The period when shooting is disabled
+var canShoot = true;                // A flag indicating whether the player can shoot a bullet
+
+var FACE_LEFT = false;                  //direction player face
+
+
+var bullet_remain = 8;
+
+
+var canHit = true;
+var name;
+var cheatmode = false;
+var TimeInterval;
+
+var gameclear;
+
+// '########::'##::::::::::'###::::'##:::'##:'########:'########::
+//  ##.... ##: ##:::::::::'## ##:::. ##:'##:: ##.....:: ##.... ##:
+//  ##:::: ##: ##::::::::'##:. ##:::. ####::: ##::::::: ##:::: ##:
+//  ########:: ##:::::::'##:::. ##:::. ##:::: ######::: ########::
+//  ##.....::: ##::::::: #########:::: ##:::: ##...:::: ##.. ##:::
+//  ##:::::::: ##::::::: ##.... ##:::: ##:::: ##::::::: ##::. ##::
+//  ##:::::::: ########: ##:::: ##:::: ##:::: ########: ##:::. ##:
+// ..:::::::::........::..:::::..:::::..:::::........::..:::::..::
 
 // The player class used in this program
 function Player() {
@@ -86,53 +158,124 @@ Player.prototype.collideScreen = function(position) {
 }
 
 
-//
-// Below are constants used in the game
-//
-var PLAYER_SIZE = new Size(40, 40);         // The size of the player
-var SCREEN_SIZE = new Size(600, 560);       // The size of the game screen
-var PLAYER_INIT_POS  = new Point(0, 0);     // The initial position of the player
-
-var MOVE_DISPLACEMENT = 5;                  // The speed of the player in motion
-var JUMP_SPEED = 15;                        // The speed of the player jumping
-var VERTICAL_DISPLACEMENT = 1;              // The displacement of vertical speed
-
-var GAME_INTERVAL = 25;                     // The time interval of running the game
 
 
-//
-// Variables in the game
-//
-var motionType = {NONE:0, LEFT:1, RIGHT:2}; // Motion enum
+// '##::::'##::'#######::'##::: ##::'######::'########:'########:'########::
+//  ###::'###:'##.... ##: ###:: ##:'##... ##:... ##..:: ##.....:: ##.... ##:
+//  ####'####: ##:::: ##: ####: ##: ##:::..::::: ##:::: ##::::::: ##:::: ##:
+//  ## ### ##: ##:::: ##: ## ## ##:. ######::::: ##:::: ######::: ########::
+//  ##. #: ##: ##:::: ##: ##. ####::..... ##:::: ##:::: ##...:::: ##.. ##:::
+//  ##:.:: ##: ##:::: ##: ##:. ###:'##::: ##:::: ##:::: ##::::::: ##::. ##::
+//  ##:::: ##:. #######:: ##::. ##:. ######::::: ##:::: ########: ##:::. ##:
+// ..:::::..:::.......:::..::::..:::......::::::..:::::........::..:::::..::
 
-var svgdoc = null;                          // SVG root document node
-var player = null;                          // The player object
-var gameInterval = null;                    // The interval
-var zoom = 1.0;                             // The zoom level of the screen
+// The Monster class used in this program
+function Monster() {
+    // this.node = svgdoc.getElementById("monster");
+    // this.position = MONSTER_INIT_POS;
+    // this.size = MONSTER_SIZE;
+    // this.motion = motionType.NONE;
+    // this.verticalSpeed = 0;
 
-var MONSTER_SIZE = new Size(40 , 40);
-var SWEET_SIZE = new Size(40,40);
-
-var BULLET_SIZE = new Size(10, 10); // The size of a bullet
-var BULLET_SPEED = 10.0;            // The speed of a bullet
-                                    //  = pixels it moves each game loop
-var SHOOT_INTERVAL = 200.0;         // The period when shooting is disabled
-var canShoot = true;                // A flag indicating whether the player can shoot a bullet
-
-var FACE_LEFT = false;					//direction player face
+    var monster = svgdoc.createElementNS("http://www.w3.org/2000/svg", "use");
 
 
-var bullet_remain = 8;
+    var MONSTER_INIT_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
+    while(intersect( MONSTER_INIT_POS, new Size(120,120), player.position, PLAYER_SIZE))
+        MONSTER_INIT_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
+
+    monster.setAttribute("x", MONSTER_INIT_POS.x);
+    monster.setAttribute("y", MONSTER_INIT_POS.y);
+
+    var MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
+    while(intersect( MONSTER_INIT_POS, new Size(120,120), player.position, PLAYER_SIZE))
+        MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
+
+    monster.setAttribute("Dx", MONSTER_DEST_POS.x);
+    monster.setAttribute("Dy", MONSTER_DEST_POS.y);
+    // console.log(MONSTER_DEST_POS.x);
+    // console.log(MONSTER_DEST_POS.y);
+    monster.setAttribute("turn",MONSTER_DEST_POS.x - MONSTER_INIT_POS.x >0? 1:0);
+    monster.setAttribute("faceLeft", MONSTER_DEST_POS.x - MONSTER_INIT_POS.x <0? 1:0);
+
+    monster.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#monster");
+    svgdoc.getElementById("monsters").appendChild(monster);
+
+}
+
+Monster.prototype.isOnPlatform = function() {
+    var platforms = svgdoc.getElementById("platforms");
+    for (var i = 0; i < platforms.childNodes.length; i++) {
+        var node = platforms.childNodes.item(i);
+        if (node.nodeName != "rect" ) continue;
+
+        var x = parseFloat(node.getAttribute("x"));
+        var y = parseFloat(node.getAttribute("y"));
+        var w = parseFloat(node.getAttribute("width"));
+        var h = parseFloat(node.getAttribute("height"));
+
+        if (((this.position.x + MONSTER_SIZE.w > x && this.position.x < x + w) ||
+            ((this.position.x + MONSTER_SIZE.w) == x && this.motion == motionType.RIGHT) ||
+            (this.position.x == (x + w) && this.motion == motionType.LEFT)) &&
+            this.position.y + MONSTER_SIZE.h == y) return true;
+    }
+    if (this.position.y + MONSTER_SIZE.h == SCREEN_SIZE.h) return true;
+
+    return false;
+}
+
+Monster.prototype.collidePlatform = function(position) {
+    var platforms = svgdoc.getElementById("platforms");
+    for (var i = 0; i < platforms.childNodes.length; i++) {
+        var node = platforms.childNodes.item(i);
+        if (node.nodeName != "rect") continue;
+
+        var x = parseFloat(node.getAttribute("x"));
+        var y = parseFloat(node.getAttribute("y"));
+        var w = parseFloat(node.getAttribute("width"));
+        var h = parseFloat(node.getAttribute("height"));
+        var pos = new Point(x, y);
+        var size = new Size(w, h);
+
+        if (intersect(position, MONSTER_SIZE, pos, size)) {
+            position.x = this.position.x;
+            if (intersect(position, MONSTER_SIZE, pos, size)) {
+                if (this.position.y >= y + h)
+                    position.y = y + h;
+                else
+                    position.y = y - MONSTER_SIZE.h;
+                this.verticalSpeed = 0;
+            }
+        }
+    }
+}
+
+Monster.prototype.collideScreen = function(position) {
+    if (position.x < 0) position.x = 0;
+    if (position.x + MONSTER_SIZE.w > SCREEN_SIZE.w) position.x = SCREEN_SIZE.w - MONSTER_SIZE.w;
+    if (position.y < 0) {
+        position.y = 0;
+        this.verticalSpeed = 0;
+    }
+    if (position.y + MONSTER_SIZE.h > SCREEN_SIZE.h) {
+        position.y = SCREEN_SIZE.h - MONSTER_SIZE.h;
+        this.verticalSpeed = 0;
+    }
+}
 
 
-var canHit = true;
-var name;
-var cheatmode = false;
-var TimeInterval;
-
-var gameclear;
 
 
+
+
+// '####:'##::: ##:'####:'########:'####::::'###::::'##:::::::'####:'########::::'###::::'########:'####::'#######::'##::: ##:
+// . ##:: ###:: ##:. ##::... ##..::. ##::::'## ##::: ##:::::::. ##::..... ##::::'## ##:::... ##..::. ##::'##.... ##: ###:: ##:
+// : ##:: ####: ##:: ##::::: ##::::: ##:::'##:. ##:: ##:::::::: ##:::::: ##::::'##:. ##::::: ##::::: ##:: ##:::: ##: ####: ##:
+// : ##:: ## ## ##:: ##::::: ##::::: ##::'##:::. ##: ##:::::::: ##::::: ##::::'##:::. ##:::: ##::::: ##:: ##:::: ##: ## ## ##:
+// : ##:: ##. ####:: ##::::: ##::::: ##:: #########: ##:::::::: ##:::: ##::::: #########:::: ##::::: ##:: ##:::: ##: ##. ####:
+// : ##:: ##:. ###:: ##::::: ##::::: ##:: ##.... ##: ##:::::::: ##::: ##:::::: ##.... ##:::: ##::::: ##:: ##:::: ##: ##:. ###:
+// '####: ##::. ##:'####:::: ##::::'####: ##:::: ##: ########:'####: ########: ##:::: ##:::: ##::::'####:. #######:: ##::. ##:
+// ....::..::::..::....:::::..:::::....::..:::::..::........::....::........::..:::::..:::::..:::::....:::.......:::..::::..::
 //
 // The load function for the SVG document
 //
@@ -140,7 +283,6 @@ function load(evt) {
 	// Set the root node to the global variable
    	svgdoc = evt.target.ownerDocument;
 }
-
 
 function Input(){
 	name = prompt("Enter your name ");
@@ -150,6 +292,8 @@ function Input(){
 }
 
 function ready(){
+        var gameArea = svgdoc.getElementById("game");
+        gameArea.style.setProperty("visibility", "visible", null);
 		svgdoc.getElementById("HPRemain").firstChild.data = 2;
 		svgdoc.getElementById("bulletRemain").firstChild.data = 8;
 		svgdoc.getElementById("score").firstChild.data = 0;
@@ -214,6 +358,58 @@ function ready(){
 		startgame();
 }
 
+function newLevel(){
+    var bullets = svgdoc.getElementById("bullets");
+    while(bullets.childNodes.length > 0) {
+        bullets.removeChild(bullets.firstChild);
+    }
+
+    var monsters = svgdoc.getElementById("monsters");
+        while(monsters.childNodes.length > 0){
+        monsters.removeChild(monsters.firstChild);
+    }
+
+    var temp = parseInt(svgdoc.getElementById("score").firstChild.data);
+    temp += parseInt(svgdoc.getElementById("Level").firstChild.data) * 100 * zoom + parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) * 5 * zoom;
+    svgdoc.getElementById("score").firstChild.data = temp;
+    clearInterval(gameInterval)
+    clearTimeout(TimeInterval);
+    svgdoc.getElementById("Level").firstChild.data = parseInt(svgdoc.getElementById("Level").firstChild.data) + 1;
+    startgame();
+}
+
+function again(){
+    choosed = false;
+    var bullets = svgdoc.getElementById("bullets");
+    while(bullets.childNodes.length > 0) {
+            bullets.removeChild(bullets.firstChild);
+    }
+    var monsters = svgdoc.getElementById("monsters");
+    while(monsters.childNodes.length > 0){
+            monsters.removeChild(monsters.firstChild);
+    }
+    var sweets = svgdoc.getElementById("sweets");
+        while(sweets.childNodes.length > 0){
+                sweets.removeChild(sweets.firstChild);
+    }
+    var node = svgdoc.getElementById("highscoretable");
+    node.style.setProperty("visibility", "hidden", null);
+
+    var startPage = svgdoc.getElementById("startpage");
+    startPage.style.setProperty("visibility", "visible", null);
+
+    var gameArea = svgdoc.getElementById("game");
+    gameArea.style.setProperty("visibility", "hidden", null);
+
+
+    svgdoc.getElementById("zoom").setAttribute("onclick", "top.zoomMode()");
+
+    var node2 = svgdoc.getElementById("highscoretext");
+    while(node2.childNodes.length > 0)
+        node2.removeChild(node2.firstChild);
+    svgdoc.getElementById("changeAppearance").setAttribute("style", "fill:rgb(255,255,0);stroke:rgb(0,0,0);stroke-width:1")
+}
+
 function startgame(){
 
 	// Attach keyboard events
@@ -237,9 +433,45 @@ function startgame(){
 	svgdoc.getElementById("verticalPlatform").setAttribute("speed",2);
 	svgdoc.getElementById("TimeRemain").firstChild.data = 60;
 	svgdoc.getElementById("bulletRemain").firstChild.data = 8;
-
 }
 
+function createSweet(){
+    var sweet = svgdoc.createElementNS("http://www.w3.org/2000/svg", "use");
+
+    var SWEET_POS ;
+    var find = false;
+    var platforms = svgdoc.getElementById("platforms");
+
+        while(!find){
+        find = true;
+        SWEET_POS = new Point(Math.random()*560, Math.random()*520);
+            for (var i = 0; i < platforms.childNodes.length; i++) {
+                var node = platforms.childNodes.item(i);
+                if (node.nodeName != "rect") continue;
+
+                var x = parseFloat(node.getAttribute("x"));
+                var y = parseFloat(node.getAttribute("y"));
+                var w = parseFloat(node.getAttribute("width"));
+                var h = parseFloat(node.getAttribute("height"));
+                var pos = new Point(x, y);
+                var size = new Size(w, h);
+                if (intersect(SWEET_POS, new Size(40,40), pos, size)) {
+                find = false
+                break;
+                }
+            }
+    }
+
+    sweet.setAttribute("x", SWEET_POS.x);
+    sweet.setAttribute("y", SWEET_POS.y);
+
+    sweet.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#sweet");
+    svgdoc.getElementById("sweets").appendChild(sweet);
+}
+
+function createMonster() {
+    var monster = new Monster();
+}
 
 //
 // This function removes all/certain nodes under a group
@@ -257,6 +489,15 @@ function cleanUpGroup(id, textOnly) {
 }
 
 
+
+// '##:::'##:'########:'##:::'##:'########:::'#######:::::'###::::'########::'########::
+//  ##::'##:: ##.....::. ##:'##:: ##.... ##:'##.... ##:::'## ##::: ##.... ##: ##.... ##:
+//  ##:'##::: ##::::::::. ####::: ##:::: ##: ##:::: ##::'##:. ##:: ##:::: ##: ##:::: ##:
+//  #####:::: ######:::::. ##:::: ########:: ##:::: ##:'##:::. ##: ########:: ##:::: ##:
+//  ##. ##::: ##...::::::: ##:::: ##.... ##: ##:::: ##: #########: ##.. ##::: ##:::: ##:
+//  ##:. ##:: ##:::::::::: ##:::: ##:::: ##: ##:::: ##: ##.... ##: ##::. ##:: ##:::: ##:
+//  ##::. ##: ########:::: ##:::: ########::. #######:: ##:::: ##: ##:::. ##: ########::
+// ..::::..::........:::::..:::::........::::.......:::..:::::..::..:::::..::........:::
 //
 // This is the keydown handling function for the SVG document
 //
@@ -271,25 +512,23 @@ function keydown(evt) {
         case "M".charCodeAt(0):
             player.motion = motionType.RIGHT;
             break;
-
-
         // Add your code here
 
         case "Z".charCodeAt(0):
             if (player.isOnPlatform()) {
-    		player.verticalSpeed = 20;
-		}
+        		player.verticalSpeed = 20;
+    		}
 
             break;
-	case 32: // spacebar = shoot
+    	case 32: // spacebar = shoot
         	if (canShoot) shootBullet();
-        	break;
-	case "C".cheatmodearCodeAt(0):
-            if (cheatmode)
-		cheatmode = false;
-	    else
-		cheatmode = true;
-	    break;
+            	break;
+        case "C".charCodeAt(0):
+            cheatmode = true;
+            break;
+        case "V".charCodeAt(0):
+            cheatmode = false;
+            break;
     }
 }
 
@@ -397,6 +636,18 @@ function normalMode(){
 	Input();
 }
 
+
+
+// :'######::::::'###::::'##::::'##:'########::::'########::'##::::::::::'###::::'##:::'##:
+// '##... ##::::'## ##::: ###::'###: ##.....::::: ##.... ##: ##:::::::::'## ##:::. ##:'##::
+//  ##:::..::::'##:. ##:: ####'####: ##:::::::::: ##:::: ##: ##::::::::'##:. ##:::. ####:::
+//  ##::'####:'##:::. ##: ## ### ##: ######:::::: ########:: ##:::::::'##:::. ##:::. ##::::
+//  ##::: ##:: #########: ##. #: ##: ##...::::::: ##.....::: ##::::::: #########:::: ##::::
+//  ##::: ##:: ##.... ##: ##:.:: ##: ##:::::::::: ##:::::::: ##::::::: ##.... ##:::: ##::::
+// . ######::: ##:::: ##: ##:::: ##: ########:::: ##:::::::: ########: ##:::: ##:::: ##::::
+// :......::::..:::::..::..:::::..::........:::::..:::::::::........::..:::::..:::::..:::::
+
+
 //
 // This function updates the position of the player's SVG object and
 // set the appropriate translation of the game screen relative to the
@@ -490,118 +741,58 @@ function updateScreen() {
 	else {
 		svgdoc.getElementById("gamearea").setAttribute("transform", "");
     }
-
 }
-
-function createSweet(){
-	var sweet = svgdoc.createElementNS("http://www.w3.org/2000/svg", "use");
-
-	var SWEET_POS ;
-	var find = false;
-	var platforms = svgdoc.getElementById("platforms");
-
-    	while(!find){
-		find = true;
-		SWEET_POS = new Point(Math.random()*560, Math.random()*520);
-    		for (var i = 0; i < platforms.childNodes.length; i++) {
-        		var node = platforms.childNodes.item(i);
-        		if (node.nodeName != "rect") continue;
-
-        		var x = parseFloat(node.getAttribute("x"));
-        		var y = parseFloat(node.getAttribute("y"));
-        		var w = parseFloat(node.getAttribute("width"));
-        		var h = parseFloat(node.getAttribute("height"));
-        		var pos = new Point(x, y);
-        		var size = new Size(w, h);
-        		if (intersect(SWEET_POS, new Size(40,40), pos, size)) {
-				find = false
-				break;
-				}
-    		}
-	}
-
-	sweet.setAttribute("x", SWEET_POS.x);
-	sweet.setAttribute("y", SWEET_POS.y);
-
-	sweet.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#sweet");
-	svgdoc.getElementById("sweets").appendChild(sweet);
-
-}
-
-function createMonster() {
-
-	var monster = svgdoc.createElementNS("http://www.w3.org/2000/svg", "use");
-
-	var MONSTER_INIT_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
-    while(intersect( MONSTER_INIT_POS, new Size(120,120), player.position, PLAYER_SIZE))
-		MONSTER_INIT_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
-
-	monster.setAttribute("x", MONSTER_INIT_POS.x);
-	monster.setAttribute("y", MONSTER_INIT_POS.y);
-
-	var MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
-    while(intersect( MONSTER_INIT_POS, new Size(120,120), player.position, PLAYER_SIZE))
-		MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
-
-	monster.setAttribute("Dx", MONSTER_DEST_POS.x);
-	monster.setAttribute("Dy", MONSTER_DEST_POS.y);
-	console.log(MONSTER_DEST_POS.x);
-	console.log(MONSTER_DEST_POS.y);
-	monster.setAttribute("turn",MONSTER_DEST_POS.x - MONSTER_INIT_POS.x >0? 1:0);
-	monster.setAttribute("faceLeft", MONSTER_DEST_POS.x - MONSTER_INIT_POS.x <0? 1:0);
-
-	monster.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#monster");
-	svgdoc.getElementById("monsters").appendChild(monster);
-
-
-}
-
 
 function moveMonsters(){
 
     var monsters = svgdoc.getElementById("monsters");
     for (var i = 0; i < monsters.childNodes.length; i++) {
-        var node = monsters.childNodes.item(i);
+        node = monsters.childNodes.item(i);
 		node.setAttribute("turn", false);
-
-		if( parseInt(node.getAttribute("x")) == parseInt(node.getAttribute("Dx")) && parseInt(node.getAttribute("y"))  == parseInt(node.getAttribute("Dy")) ){
-
+        x = parseInt(node.getAttribute("x"));
+        dx = parseInt(node.getAttribute("Dx"));
+        y = parseInt(node.getAttribute("y"));
+        dy = parseInt(node.getAttribute("Dy"));
+		if( x == dx && y  == dy ){
 			var MONSTER_DEST_POS = new Point(Math.floor(Math.random()*500+50), Math.floor(Math.random()*500)+10);
 			node.setAttribute("Dx", MONSTER_DEST_POS.x);
 			node.setAttribute("Dy", MONSTER_DEST_POS.y);
 
-			var check = MONSTER_DEST_POS.x - parseInt(node.getAttribute("x")) <0? 1:0;
+			var check = MONSTER_DEST_POS.x - x <0? 1:0;
 			if(check != parseInt(node.getAttribute("faceLeft"))){
 				node.setAttribute("turn", true);
 				node.setAttribute("faceLeft",check);
 			}
 		}
-		else if( parseInt(node.getAttribute("x"))== parseInt(node.getAttribute("Dx")) && parseInt(node.getAttribute("y"))  != parseInt(node.getAttribute("Dy")) ){
+		else if( x == dx && y != dy ){
 			var y_displacement = 1;
-			if(parseInt(node.getAttribute("y")) > parseInt(node.getAttribute("Dy")))
+			if(y > dy )
 				y_displacement *= -1;
-			node.setAttribute("y", parseInt(node.getAttribute("y")) + y_displacement);
+			node.setAttribute("y", y + y_displacement);
 		}
-		else if( parseInt(node.getAttribute("x"))!= parseInt(node.getAttribute("Dx")) && parseInt(node.getAttribute("y"))  == parseInt(node.getAttribute("Dy")) ){
+		else if( x != dx && y  == dy ){
 			var x_displacement = 1;
 			if(parseInt(node.getAttribute("faceLeft")))
 				x_displacement *= -1;
-			node.setAttribute("x", parseInt(node.getAttribute("x")) + x_displacement);
+			node.setAttribute("x", x + x_displacement);
 		}
 		else{
 			var y_displacement = 1;
-			if(parseInt(node.getAttribute("y")) > parseInt(node.getAttribute("Dy")))
+			if(y > dy)
 				y_displacement *= -1;
-			node.setAttribute("y", parseInt(node.getAttribute("y")) + y_displacement);
+			node.setAttribute("y", y + y_displacement);
 
 			var x_displacement = 1;
 			if(parseInt(node.getAttribute("faceLeft")))
 				x_displacement *= -1;
-			node.setAttribute("x", parseInt(node.getAttribute("x")) + x_displacement);
+			node.setAttribute("x", x + x_displacement);
 
-			console.log(parseInt(node.getAttribute("x")));
-			console.log(parseInt(node.getAttribute("y")));
+			// console.log(parseInt(node.getAttribute("x")));
+			// console.log(parseInt(node.getAttribute("y")));
 		}
+        x = parseInt(node.getAttribute("x"));
+        y = parseInt(node.getAttribute("y"));
+
 	}
 }
 
@@ -650,7 +841,6 @@ function moveBullets() {
 
     }
 }
-
 
 function collisionDetection() {
     // Check whether the player collides with a monster
@@ -728,8 +918,6 @@ function collisionDetection() {
 	}
 }
 
-
-
 function gameover(){
 
 	clearInterval(gameInterval);
@@ -745,9 +933,7 @@ function gameover(){
 
 	setHighScoreTable(table);
 	showHighScoreTable(table);
-
 }
-
 
 function decreaseTime(){
 	svgdoc.getElementById("TimeRemain").firstChild.data = parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) -1;
@@ -755,58 +941,5 @@ function decreaseTime(){
 		gameover();
 	else
 		TimeInterval = setTimeout("decreaseTime()",1000);
-
 }
 
-
-function newLevel(){
-	var bullets = svgdoc.getElementById("bullets");
-	while(bullets.childNodes.length > 0) {
-		bullets.removeChild(bullets.firstChild);
-	}
-
-	var monsters = svgdoc.getElementById("monsters");
-        while(monsters.childNodes.length > 0){
-		monsters.removeChild(monsters.firstChild);
-	}
-
-	var temp = parseInt(svgdoc.getElementById("score").firstChild.data);
-	temp += parseInt(svgdoc.getElementById("Level").firstChild.data) * 100 * zoom + parseInt(svgdoc.getElementById("TimeRemain").firstChild.data) * 5 * zoom;
-	svgdoc.getElementById("score").firstChild.data = temp;
-	clearInterval(gameInterval)
-	clearTimeout(TimeInterval);
-	svgdoc.getElementById("Level").firstChild.data = parseInt(svgdoc.getElementById("Level").firstChild.data) + 1;
-	startgame();
-
-
-}
-
-function again(){
-	choosed = false;
-	var bullets = svgdoc.getElementById("bullets");
-	while(bullets.childNodes.length > 0) {
-			bullets.removeChild(bullets.firstChild);
-	}
-
-	var monsters = svgdoc.getElementById("monsters");
-	while(monsters.childNodes.length > 0){
-			monsters.removeChild(monsters.firstChild);
-	}
-	var sweets = svgdoc.getElementById("sweets");
-		while(sweets.childNodes.length > 0){
-				sweets.removeChild(sweets.firstChild);
-	}
-    var node = svgdoc.getElementById("highscoretable");
-    node.style.setProperty("visibility", "hidden", null);
-
-    var startPage = svgdoc.getElementById("startpage");
-    startPage.style.setProperty("visibility", "visible", null);
-
-    var gameArea = svgdoc.getElementById("gamearea");
-    gameArea.style.setProperty("visibility", "hidden", null);
-
-    var node2 = svgdoc.getElementById("highscoretext");
-    while(node2.childNodes.length > 0)
-    	node2.removeChild(node2.firstChild);
-    svgdoc.getElementById("changeAppearance").setAttribute("style", "fill:rgb(255,255,0);stroke:rgb(0,0,0);stroke-width:1")
-}
