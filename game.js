@@ -430,7 +430,8 @@ function startgame(){
 
 	TimeInterval = setTimeout("decreaseTime()", 1000);
 	gameclear = false;
-	svgdoc.getElementById("verticalPlatform").setAttribute("speed",2);
+    svgdoc.getElementById("verticalPlatform-1").setAttribute("speed",2);
+    svgdoc.getElementById("verticalPlatform-2").setAttribute("speed",2);
 	svgdoc.getElementById("TimeRemain").firstChild.data = 60;
 	svgdoc.getElementById("bulletRemain").firstChild.data = 8;
 }
@@ -661,28 +662,31 @@ function normalMode(){
 // set the appropriate translation of the game screen relative to the
 // the position of the player
 //
-function updateScreen() {
 
-    var verticalBar = svgdoc.getElementById("verticalPlatform");
+function moveVerticalBar(verticalBar) {
     if(parseInt(verticalBar.getAttribute("y")) == 400 )
-	verticalBar.setAttribute("speed", -2 );
+    verticalBar.setAttribute("speed", -2 );
     else if(parseInt(verticalBar.getAttribute("y")) == 140)
-	verticalBar.setAttribute("speed", 2 );
+    verticalBar.setAttribute("speed", 2 );
 
 
     var verticalBarSpeed = parseInt(verticalBar.getAttribute("speed"));
 
     if(parseInt(verticalBar.getAttribute("y")) == player.position.y + PLAYER_SIZE.h
-		&& player.position.x + PLAYER_SIZE.w > parseInt(verticalBar.getAttribute("x"))
-		&& player.position.x < parseInt(verticalBar.getAttribute("x")) + parseInt(verticalBar.getAttribute("width")) )
+        && player.position.x + PLAYER_SIZE.w > parseInt(verticalBar.getAttribute("x"))
+        && player.position.x < parseInt(verticalBar.getAttribute("x")) + parseInt(verticalBar.getAttribute("width")) )
     {
-		player.position.y += verticalBarSpeed;
+        player.position.y += verticalBarSpeed;
     }
 
     // Transform the player
     player.node.setAttribute("transform", "translate(" + player.position.x + "," + player.position.y + ")");
     verticalBar.setAttribute("y", parseInt(verticalBar.getAttribute("speed")) + parseInt(verticalBar.getAttribute("y")) );
+}
+function updateScreen() {
 
+    moveVerticalBar(svgdoc.getElementById("verticalPlatform-1"));
+    moveVerticalBar(svgdoc.getElementById("verticalPlatform-2"));
 
     if(FACE_LEFT){
     	player.node.setAttribute("transform","translate(" + (player.position.x + PLAYER_SIZE.w)  + "," + player.position.y + ") scale(-1, 1)");
@@ -712,7 +716,7 @@ function updateScreen() {
 		}
 	}
 
-	if(intersect( new Point(260,40) , new Size(40,40) , player.position, PLAYER_SIZE))
+	if(intersect( new Point(560,20) , new Size(40,40) , player.position, PLAYER_SIZE))
 		if(gameclear)
 			newLevel();
 
