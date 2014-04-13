@@ -122,7 +122,7 @@ var canShoot = true;                // A flag indicating whether the player can 
 var FACE_LEFT = false;					//direction player face
 
 
-var bullet_remain = 7;
+var bullet_remain = 8;
 
 
 var canHit = true;
