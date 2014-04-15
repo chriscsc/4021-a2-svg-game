@@ -156,6 +156,13 @@ onload="top.load(evt)">
 		<tspan x="66.5" y="416" fill="#FFFFFF"></tspan>
 	</text>
 
+    <g id="nameandid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage" transform="translate(420,500)">
+        <text id="Cheung-Shing-Cheong" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="260" fill="#FFFFFF">
+            <tspan x="0" y="35">Cheung Shing Cheong</tspan>
+            <tspan x="0" y="78">3302</tspan>
+        </text>
+    </g>
+
 <!--
 '########::'##::::'##:'########:'########::'#######::'##::: ##::'######::
 ##.... ##: ##:::: ##:... ##..::... ##..::'##.... ##: ###:: ##:'##... ##:
