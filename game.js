@@ -282,6 +282,10 @@ Monster.prototype.collideScreen = function(position) {
 function load(evt) {
 	// Set the root node to the global variable
    	svgdoc = evt.target.ownerDocument;
+    backgroundMusic = document.getElementById('audio_bg');
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = .3;
+    backgroundMusic.play();
 }
 
 function Input(){
@@ -294,7 +298,6 @@ function Input(){
 function ready(){
         var gameArea = svgdoc.getElementById("game");
         gameArea.style.setProperty("visibility", "visible", null);
-		svgdoc.getElementById("HPRemain").firstChild.data = 2;
 		svgdoc.getElementById("bulletRemain").firstChild.data = 8;
 		svgdoc.getElementById("score").firstChild.data = 0;
 		svgdoc.getElementById("Level").firstChild.data = 1;
@@ -359,6 +362,8 @@ function ready(){
 }
 
 function newLevel(){
+    var audio_level_up = new Audio("audio/levelUp.wav");
+    audio_level_up.play();
     var bullets = svgdoc.getElementById("bullets");
     while(bullets.childNodes.length > 0) {
         bullets.removeChild(bullets.firstChild);
@@ -695,9 +700,6 @@ function updateScreen() {
     	player.node.setAttribute("transform","translate(" + (player.position.x + PLAYER_SIZE.w)  + "," + player.position.y + ") scale(-1, 1)");
     }
 
-    if(parseInt(svgdoc.getElementById("HPRemain").firstChild.data) ==1){
-    	svgdoc.getElementById("changeAppearance").setAttribute("style", "fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1");
-    }
 
     svgdoc.getElementById("nameBar").firstChild.data = name;
     svgdoc.getElementById("nameBar").setAttribute("x", player.position.x + PLAYER_SIZE.w/2);
@@ -730,31 +732,48 @@ function updateScreen() {
     // Add your code here
 
 
-    if(zoom >1.0){
-     	sx = zoom;
+ //    if(zoom >1.0){
+ //     	sx = zoom;
 
-    	sy = zoom;
-
-
-    	var cx = player.position.x + PLAYER_SIZE.w/2;
-    	var cy = player.position.y + PLAYER_SIZE.h/2;
-    	var tx = SCREEN_SIZE.w/zoom/2;
-    	var ty = SCREEN_SIZE.h/zoom/2;
-
-    	if(cx < SCREEN_SIZE.w/zoom/2)
-    		tx = cx;
-    	if(cy < SCREEN_SIZE.h/zoom/2)
-    		ty = cy;
-    	if(cx > SCREEN_SIZE.w - SCREEN_SIZE.w/zoom/2)
-    		tx = 2 * SCREEN_SIZE.w/zoom/2 - (SCREEN_SIZE.w- cx );
-    	if(cy > SCREEN_SIZE.h - SCREEN_SIZE.h/zoom/2)
-    		ty = 2 * SCREEN_SIZE.h/zoom/2 - (SCREEN_SIZE.h- cy );
+ //    	sy = zoom;
 
 
-    	svgdoc.getElementById("gamearea").setAttribute("transform", " translate(" + zoom * tx + ", " + zoom * ty + ") scale(" + sx + "," + sy + ") translate(" + -cx+ ", " + -cy + ")");
+ //    	var cx = player.position.x + PLAYER_SIZE.w/2;
+ //    	var cy = player.position.y + PLAYER_SIZE.h/2;
+ //    	var tx = SCREEN_SIZE.w/zoom/2;
+ //    	var ty = SCREEN_SIZE.h/zoom/2;
+
+ //    	if(cx < SCREEN_SIZE.w/zoom/2)
+ //    		tx = cx;
+ //    	if(cy < SCREEN_SIZE.h/zoom/2)
+ //    		ty = cy;
+ //    	if(cx > SCREEN_SIZE.w - SCREEN_SIZE.w/zoom/2)
+ //    		tx = 2 * SCREEN_SIZE.w/zoom/2 - (SCREEN_SIZE.w- cx );
+ //    	if(cy > SCREEN_SIZE.h - SCREEN_SIZE.h/zoom/2)
+ //    		ty = 2 * SCREEN_SIZE.h/zoom/2 - (SCREEN_SIZE.h- cy );
+
+
+ //    	svgdoc.getElementById("gamearea").setAttribute("transform", " translate(" + zoom * tx + ", " + zoom * ty + ") scale(" + sx + "," + sy + ") translate(" + -cx+ ", " + -cy + ")");
+
+ //    }
+	// else {
+	// 	svgdoc.getElementById("gamearea").setAttribute("transform", "");
+ //    }
+    var gamearea = svgdoc.getElementById("gamearea");
+    if (zoom != 1) {
+        
+        var tx = -((player.position.x <= 130) ? 0 : 
+                   (player.position.x >= 430) ? 300 : 
+                    player.position.x + PLAYER_SIZE.w / 2 - 150);
+                  
+        var ty = -((player.position.y <= 110) ? 0 :
+                   (player.position.y >= 400) ? 280 :
+                    player.position.y + PLAYER_SIZE.h / 2 - 140);
+        
+        gamearea.setAttribute("transform", "scale(" + zoom + ") translate(" + tx + ", " + ty + ")");
     }
-	else {
-		svgdoc.getElementById("gamearea").setAttribute("transform", "");
+    else{
+        gamearea.setAttribute("transform", "");
     }
 }
 
@@ -814,6 +833,9 @@ function moveMonsters(){
 function shootBullet() {
 
     if(parseInt(svgdoc.getElementById("bulletRemain").firstChild.data)>0 || cheatmode){
+        var audio_shoot = new Audio("audio/shoot.wav");
+        audio_shoot.play();
+
         // Disable shooting for a short period of time
         canShoot = false;
         setTimeout("canShoot = true", SHOOT_INTERVAL);
@@ -864,24 +886,10 @@ function collisionDetection() {
 
         // For each monster check if it overlaps with the player
         // if yes, stop the game
-        var x = parseInt(monster.getAttribute("x"));
-        var y = parseInt(monster.getAttribute("y"));
-
-
-
-	    if (intersect(new Point(x,y), MONSTER_SIZE, player.position, PLAYER_SIZE) && canHit && !cheatmode) {
-
-			var temp = parseInt(svgdoc.getElementById("HPRemain").firstChild.data) -1;
-			svgdoc.getElementById("HPRemain").firstChild.data = temp;
-
-			canHit = false;
-
-			setTimeout("canHit = true", 500);
-	        if(temp == 0 ){
-				gameover();
-            }
-		}
-
+        if(intersect(new Point(monster.getAttribute("x"),monster.getAttribute("y")),MONSTER_SIZE, player.position, PLAYER_SIZE) &&!cheatmode)
+        {
+            gameover();
+        }
     }
 
     // Check whether a bullet hits a monster
@@ -904,7 +912,8 @@ function collisionDetection() {
     		if (intersect(new Point(mx,my), MONSTER_SIZE, new Point(x,y), BULLET_SIZE )) {
     			bullet.parentNode.removeChild(bullet);
     			monster.parentNode.removeChild(monster);
-
+                var audio_shoot = new Audio("audio/monsterDie.wav");
+                audio_shoot.play();
     		}
     	}
     }
@@ -931,7 +940,7 @@ function collisionDetection() {
 
     if(intersect(new Point(200,15),new Size(29,44), player.position, PLAYER_SIZE))
     {
-        player.position.x = 500;
+        player.position.x = 470;
         player.position.y = 370;
         player.node.setAttribute("transform", "translate(" + player.position.x + "," + player.position.y + ")");
     }
@@ -947,6 +956,8 @@ function collisionDetection() {
 }
 
 function gameover(){
+    var audio_shoot = new Audio("audio/playerDie.wav");
+    audio_shoot.play();
     zoom = 1.0;
 	clearInterval(gameInterval);
 	clearTimeout(TimeInterval);
