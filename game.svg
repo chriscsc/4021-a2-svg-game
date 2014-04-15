@@ -102,7 +102,7 @@ onload="top.load(evt)">
 	..:::::..:::.......:::..::::..:::......::::::..:::::........::..:::::..::
 	-->
 	<g id="monster">
-		<g id="Oval-1-+-Path-1" sketch:type="MSLayerGroup" transform="translate(21.000000, 21.000000) scale(-1, 1) translate(-21.000000, -21.000000) translate(1.000000, 1.000000)">
+<!-- 		<g id="Oval-1-+-Path-1" sketch:type="MSLayerGroup" transform="translate(21.000000, 21.000000) scale(-1, 1) translate(-21.000000, -21.000000) translate(1.000000, 1.000000)">
 			<circle id="Oval-1" stroke="#979797" fill="url(#radialGradient-1)" sketch:type="MSShapeGroup" cx="20" cy="20" r="20"></circle>
 			<path d="M5,15.4698663 L14.9872459,9 C14.9872459,9 17.9999999,13.2309855 18,15.0648521 C18,16.8987187 5,15.4698663 5,15.4698663 Z" id="Path-1" fill="url(#linearGradient-2)" sketch:type="MSShapeGroup"></path>
 
@@ -113,7 +113,21 @@ onload="top.load(evt)">
 			                  to="360 20 20"
 			                  dur="10s"
 			                  repeatCount="indefinite"/>
-		</g>
+		</g> -->
+
+        <g id="Oval-1-+-Oval-2-+-Oval-3" sketch:type="MSLayerGroup" transform="translate(-3.000000, 0.000000)">
+            <path d="M15.7157527,23.8482385 L23.7092732,23.8482385 L13.0232144,37.2352459 C15.9818047,38.9920138 19.432145,40 23.1165414,40 C34.0978723,40 43,31.045695 43,20 C43,8.954305 34.0978723,0 23.1165414,0 C12.1352104,0 3.23308271,8.954305 3.23308271,20 C3.23308271,21.3163188 3.35950681,22.6029365 3.60080786,23.8482385 L3.60080786,23.8482385 L6.74879869,23.8482385 L8.00627615,28.2819383 L9.26375361,23.8482385 L9.26375361,23.8482385 L9.98729242,23.8482385 L9.98729242,23.8482385 L11.2447699,28.2819383 L12.5022473,23.8482385 L13.2507745,23.8482385 L14.4832636,28.1938326 L15.7157527,23.8482385 Z" id="Oval-1" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+            <ellipse id="Oval-2" fill="#FFFFFF" sketch:type="MSShapeGroup" cx="17.1353383" cy="12.1409214" rx="6.46616541" ry="6.50406504"></ellipse>
+            <ellipse id="Oval-3" fill="#000000" sketch:type="MSShapeGroup" cx="13.9022556" cy="9.10569106" rx="2.04761905" ry="2.0596206">
+		        <animateTransform attributeName="transform"
+		                          attributeType="XML"
+		                          type="rotate"
+		                          from="0 17 8.5"
+		                          to="360 16 9"
+		                          dur="1s"
+		                          repeatCount="indefinite"/>
+            </ellipse>
+        </g>
 	</g>
 </defs>
 
@@ -267,7 +281,7 @@ onload="top.load(evt)">
 				            <tspan x="560" y="50">EXIT</tspan>
 				        </text>
 					</g>
-				
+
 
 
 					<g id="portal-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage" transform="translate(200, 15)">
