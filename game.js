@@ -313,7 +313,7 @@ function ready(){
 		newPlatform1.setAttribute("width", 40);
 		newPlatform1.setAttribute("height", 20);
 		newPlatform1.setAttribute("type", "disappearing");
-		newPlatform1.style.setProperty("opacity", 1, null);
+		newPlatform1.setAttribute("opacity", 1);
 		//newPlatform1.setAttribute("style", "fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1");
 		newPlatform1.setAttribute("rx", 5.79165 );
 		newPlatform1.setAttribute("ry", 5.79165 );
@@ -330,7 +330,7 @@ function ready(){
 		newPlatform2.setAttribute("width", 40);
 		newPlatform2.setAttribute("height", 20);
 		newPlatform2.setAttribute("type", "disappearing");
-		newPlatform2.style.setProperty("opacity", 1, null);
+		newPlatform2.setAttribute("opacity", 1);
 		//newPlatform2.setAttribute("style", "fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1");
 		newPlatform2.setAttribute("rx", 5.79165 );
 		newPlatform2.setAttribute("ry", 5.79165 );
@@ -347,7 +347,7 @@ function ready(){
 		newPlatform3.setAttribute("width", 40);
 		newPlatform3.setAttribute("height", 20);
 		newPlatform3.setAttribute("type", "disappearing");
-		newPlatform3.style.setProperty("opacity", 1, null);
+		newPlatform3.setAttribute("opacity", 1);
 		//newPlatform3.setAttribute("style", "fill:rgb(64,255,64);stroke:rgb(0,0,0);stroke-width:1");
 		newPlatform3.setAttribute("rx", 5.79165 );
 		newPlatform3.setAttribute("ry", 5.79165 );
@@ -598,23 +598,27 @@ function gamePlay() {
             player.verticalSpeed = 0;
     }
 
-	var platforms = svgdoc.getElementById("platforms");
-	if(isOnPlatform && platforms.childNodes.length > 31){
-		for (var i = 0; i < platforms.childNodes.length; i++) {
-        	var node = platforms.childNodes.item(i);
-			if (node.nodeName != "rect" ) continue;
-			if (node.getAttribute("type") == "disappearing") {
-				if(parseInt(node.getAttribute("y")) == player.position.y + PLAYER_SIZE.h
-					&& player.position.x + PLAYER_SIZE.w > parseInt(node.getAttribute("x"))
-					&& player.position.x < parseInt(node.getAttribute("x")) + parseInt(node.getAttribute("width"))){
-					node.style.setProperty("opacity",  parseFloat(node.style.getPropertyValue("opacity")) - 0.1 , null);
-					if( parseFloat(node.style.getPropertyValue("opacity"))== 0.0)
-							 platforms.removeChild(node);
-				}
-			}
-		}
-	}
+    collisionDetection();
 
+    //clear disappering platform
+    var platforms = svgdoc.getElementById("platforms");
+    if(isOnPlatform && platforms.childNodes.length > 17){
+        for (var i = 17; i < platforms.childNodes.length; i++) {
+            var platform = platforms.childNodes.item(i);
+            if (platform.nodeName != "rect" )
+                continue;
+            if (platform.getAttribute("type") == "disappearing") {
+                if((parseInt(platform.getAttribute("y")) == (player.position.y + PLAYER_SIZE.h))
+                    && ((player.position.x + PLAYER_SIZE.w) > parseInt(platform.getAttribute("x")))
+                    && (player.position.x < (parseInt(platform.getAttribute("x")) + parseInt(platform.getAttribute("width"))))){
+                    var platformOpacity = parseFloat((platform.getAttribute("opacity")*10 - 1)/10);
+                    platform.setAttribute("opacity",platformOpacity);
+                    if( parseFloat(platform.getAttribute("opacity"))== 0)
+                        platforms.removeChild(platform);
+                }
+            }
+        }
+    }
 
     // Get the new position of the player
     var position = new Point();
@@ -629,7 +633,6 @@ function gamePlay() {
     player.position = position;
     moveBullets();
     moveMonsters()
-    collisionDetection();
     updateScreen();
 }
 
@@ -874,8 +877,6 @@ function collisionDetection() {
 			canHit = false;
 
 			setTimeout("canHit = true", 500);
-
-
 	        if(temp == 0 ){
 				gameover();
             }
@@ -927,6 +928,22 @@ function collisionDetection() {
 	if(sweets.childNodes.length == 0){
 		gameclear = true;
 	}
+
+    if(intersect(new Point(200,15),new Size(29,44), player.position, PLAYER_SIZE))
+    {
+        player.position.x = 500;
+        player.position.y = 370;
+        player.node.setAttribute("transform", "translate(" + player.position.x + "," + player.position.y + ")");
+    }
+    
+    //Check whether the player touches port 2
+    if(intersect(new Point(550,370),new Size(29,44), player.position, PLAYER_SIZE))
+    {
+        player.position.x = 230;
+        player.position.y = 15;
+        player.node.setAttribute("transform", "translate(" + player.position.x + "," + player.position.y + ")");
+    }
+
 }
 
 function gameover(){

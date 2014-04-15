@@ -306,6 +306,23 @@
 
 					<polygon points="280,60 282.887,65 277.113,65" transform="matrix(1.73205 0 0 1.2 -117.974 14) translate(-53.1162 -14.1667) translate(277.113 65) scale(1.66661 1.33333) translate(-277.113 -65) translate(0.57737 0.208333)" style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
  -->				</g>
+	
+			    <g id="portal-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage" transform="translate(200, 15)">
+			        <ellipse id="Oval-2" stroke="#4990E2" stroke-width="2" fill="#000000" sketch:type="MSShapeGroup" cx="8.5" cy="22" rx="7.5" ry="21"></ellipse>
+			        <g id="Oval-1-+-Path-1-+-Path-3" sketch:type="MSLayerGroup" transform="translate(2.000000, 7.000000)" stroke="#979797" fill="#A95D5D">
+			            <circle id="Oval-1" sketch:type="MSShapeGroup" cx="10" cy="5" r="5"></circle>
+			            <path d="M10.2774066,16.3069166 L7.35980717,19.1111603 L0,19.085213 L0.00927990359,16.1515554 L5.68436276,16.1515554 L9.67725218,12 L10.5548403,20.811348 L10.9800697,27.7153998 L7.35980717,34 L11.8683968,34 L11.7944531,33.2575747 L16.8605734,24.4554312 L18.7154539,30.1778891 L24.0863918,30.1778891 L24.0863265,26.5172294 L20.9768641,26.5172294 L20.9768641,21.5120029 L17.7938102,14.9586388 L20.9272332,14.9586388 L22.6024221,17.9463104 L26,18.1308261 L22.2016354,11.8029261 C22.2016354,11.8029261 13.0782712,5.49634237 10,11.8029261 L10.2774066,16.3069166 Z M10.2774066,16.3069166 L11.0224755,15.5907953 L14,22.4729471 L10.9800697,27.7153998 L11.3671463,34 L11.7944531,33.2575747 L10.5548403,20.811348 L10.2774066,16.3069166 Z" id="Path-1" sketch:type="MSShapeGroup"></path>
+			            <path id="Path-3" sketch:type="MSShapeGroup" d="M10,11.2125 L11,11.2125"></path>
+			        </g>
+			    </g>
+    			<g id="portal-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage" transform="translate(550, 370) scale(-1,1)">
+			        <ellipse id="Oval-2" stroke="#4990E2" stroke-width="2" fill="#000000" sketch:type="MSShapeGroup" cx="8.5" cy="22" rx="7.5" ry="21"></ellipse>
+			        <g id="Oval-1-+-Path-1-+-Path-3" sketch:type="MSLayerGroup" transform="translate(2.000000, 7.000000)" stroke="#979797" fill="#A95D5D">
+			            <circle id="Oval-1" sketch:type="MSShapeGroup" cx="10" cy="5" r="5"></circle>
+			            <path d="M10.2774066,16.3069166 L7.35980717,19.1111603 L0,19.085213 L0.00927990359,16.1515554 L5.68436276,16.1515554 L9.67725218,12 L10.5548403,20.811348 L10.9800697,27.7153998 L7.35980717,34 L11.8683968,34 L11.7944531,33.2575747 L16.8605734,24.4554312 L18.7154539,30.1778891 L24.0863918,30.1778891 L24.0863265,26.5172294 L20.9768641,26.5172294 L20.9768641,21.5120029 L17.7938102,14.9586388 L20.9272332,14.9586388 L22.6024221,17.9463104 L26,18.1308261 L22.2016354,11.8029261 C22.2016354,11.8029261 13.0782712,5.49634237 10,11.8029261 L10.2774066,16.3069166 Z M10.2774066,16.3069166 L11.0224755,15.5907953 L14,22.4729471 L10.9800697,27.7153998 L11.3671463,34 L11.7944531,33.2575747 L10.5548403,20.811348 L10.2774066,16.3069166 Z" id="Path-1" sketch:type="MSShapeGroup"></path>
+			            <path id="Path-3" sketch:type="MSShapeGroup" d="M10,11.2125 L11,11.2125"></path>
+			        </g>
+			    </g>
 			    
 		        <g id="bullets"/>
 				<g id="sweets"/>
