@@ -1,7 +1,9 @@
 //
 // A score record JavaScript class to store the name and the score of a player
-//
-function ScoreRecord(name, score) {
+// add id to check current user's score
+
+function ScoreRecord(id, name, score) {
+    this.id = id;
     this.name = name;
     this.score = score;
 }
@@ -24,10 +26,11 @@ function getHighScoreTable() {
 			break;
         // Extract the name and score of the player from the cookie value
 		var temp = value.split("~");
-		var name = temp[0];
-		var score = temp[1];
+        var id = parseInt(temp[0])+1;
+		var name = temp[1];
+		var score = temp[2];
         // Add a new score record at the end of the array
-		table.push(new ScoreRecord(name, parseInt(score)));
+		table.push(new ScoreRecord(id, name, parseInt(score)));
     }
 
     return table;
@@ -46,7 +49,7 @@ function setHighScoreTable(table) {
         // Contruct the cookie name
 		var cookieName = "player";
         // Store the ith record as a cookie using the cookie name
-        setCookie(cookieName + i.toString(), table[i].name + "~" + table[i].score.toString());
+        setCookie(cookieName + i.toString(), table[i].id + "~" + table[i].name + "~" + table[i].score.toString());
     }
 }
 
@@ -61,6 +64,9 @@ function addHighScore(record, node) {
     // Set the attributes and create the text
 	name1.setAttribute("x" , 100);
 	name1.setAttribute("dy" , 30);
+    if(record.id == 0){
+        name1.setAttribute("fill", "#FF0000");
+    }
 	name1.appendChild(svgdoc.createTextNode(record.name));
     // Add the name to the text node
     node.appendChild(name1);

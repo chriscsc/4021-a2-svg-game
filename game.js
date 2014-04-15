@@ -934,7 +934,7 @@ function gameover(){
 	clearInterval(gameInterval);
 	clearTimeout(TimeInterval);
 	var table = getHighScoreTable();
-	var record = new ScoreRecord(svgdoc.getElementById("nameBar").firstChild.data, parseInt(svgdoc.getElementById("score").firstChild.data));
+	var record = new ScoreRecord(0, svgdoc.getElementById("nameBar").firstChild.data, parseInt(svgdoc.getElementById("score").firstChild.data));
 	for(var i = 0 ; i < 10 ;++i){
 		if(table.length == 0 || i == table.length || table[i].score < record.score   ){
 			table.splice(i, 0, record);
